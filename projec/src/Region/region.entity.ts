@@ -4,7 +4,7 @@ import {HaciendaEntity} from "../hacienda/hacienda.entity";
 export class RegionEntity {
 
     @PrimaryGeneratedColumn()
-    idRegion: number;
+    id: number;
 
     @Index()
     @Column(
@@ -12,25 +12,17 @@ export class RegionEntity {
             name: 'nombreRegion',
             type: 'varchar',
             length: 50,
-            default: 'region'
+            default:""
         }
     )
-    nombreRegion: string;
+    nombre: string;
 
     @Column({
         nullable: false,
     })
-    descripcionRegion: string;
+    descripcion: string;
 
-    @Column({
-        nullable: false
-    })
-    telefonoHacienda: string;
 
-    @Column({
-        nullable: false
-    })
-    password: string;
     @OneToMany(
         type => HaciendaEntity, // Tipo de Dato Un Usuario a muchos
 

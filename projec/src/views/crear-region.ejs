@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Region</title>
+</head>
+<body>
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="/bootstrap-4.0.0-dist/css/animate.css">
+
+    <link rel="stylesheet"
+          href="/projec/bootstrap-4.0.0-dist/css/mis-estilos.css">
+</head>
+<body>
+<div class="container">
+    <% var creando = typeof region === "undefined" ? true : false; %>
+
+    <h1> <%= creando ? 'Crear' : 'Actualizar' %> Region</h1>
+    <p><%= creando ? 'Creando' : 'Actualizando' %> un region.</p>
+
+    <form action="/Region/<%= creando ? 'crear' : 'actualizar' %>-region/<%= creando ? '' : region.id %>"
+          method="POST">
+        <div class="row">
+            <div class="col-sm-9">
+                <div>
+                    <label for="region">Region</label>
+                    <input id="region"
+                           value="<%= creando ? '' : region.nombre %>"
+                           name="region" type="text">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-9">
+
+
+                <div>
+                    <label for="descripcion">Descripcion</label>
+                    <textarea name="descripcion"
+                              id="descripcion"
+                              cols="30"
+                              rows="3"><%= creando ? '' : region.descripcion %>
+        </textarea>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+
+                <button type="reset">Resetear formulario</button>
+                <button onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Region</button>
+            </div>
+        </div>
+
+
+    </form>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/Region/inicio">
+                <button>Regresar</button>
+            </a>
+
+        </div>
+    </div>
+
+
+    <script>
+        function validarNombre(evento) {
+            // 0) Obtener el valor del campo
+            // 1) Revisar el campo no este vacio
+            // 2) Revisar el campo tenga 3 char
+            const inputNombre = document
+                .getElementById("nombre");
+            const nombre = inputNombre.value;
+            if (nombre.length < 3) {
+                event.preventDefault()
+                alert('Tu nombre es muy corto')
+            }else{
+
+            }
+
+        }
+    </script>
+
+
+</div>
+
+
+
+</body>
+</html>
+
+
+</body>
+</html>

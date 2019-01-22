@@ -12,6 +12,7 @@ import {SensorEntity} from "./Sensor/sensor.entity";
 import {LecturaEntity} from "./Lectura/lectura.entity";
 import {SubparcelaEntity} from "./Subparcela/subparcela.entity";
 import {RolEntity} from "./rol/rol.entity";
+import {RegionModule} from "./Region/region.module";
 
 @Module({
     imports: [
@@ -36,7 +37,7 @@ import {RolEntity} from "./rol/rol.entity";
                     RolEntity
                 ]
             }),
-
+RegionModule
     ], // Modulos
     controllers: [AppController], // Controllers
     providers: [
