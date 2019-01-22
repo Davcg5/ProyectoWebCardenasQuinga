@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <style>
+        .rojo {
+            background-color: red;
+        }
+    </style>
     <meta charset="UTF-8">
     <title>Region</title>
 </head>
@@ -12,7 +18,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Inicio</title>
+    <title>Region</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet"
@@ -31,47 +37,55 @@
     <form action="/Region/<%= creando ? 'crear' : 'actualizar' %>-region/<%= creando ? '' : region.id %>"
           method="POST">
         <div class="row">
-            <div class="col-sm-9">
-                <div>
-                    <label for="region">Region</label>
+            <div class="col-sm-3">
+
+                    <label for="region" >Region</label>
+            </div>
+                    <div class="col-sm-6">
                     <input id="region"
                            value="<%= creando ? '' : region.nombre %>"
                            name="region" type="text">
-                </div>
-            </div>
+                    </div>
+
         </div>
 
         <div class="row">
-            <div class="col-sm-9">
+            <div class="col-sm-3">
 
-
-                <div>
                     <label for="descripcion">Descripcion</label>
+            </div>
+            <div class="col-sm-6">
                     <textarea name="descripcion"
                               id="descripcion"
                               cols="30"
                               rows="3"><%= creando ? '' : region.descripcion %>
-        </textarea>
-                </div>
+                    </textarea>
             </div>
 
             <div class="col-sm-3">
 
-                <button type="reset">Resetear formulario</button>
-                <button onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Region</button>
+                <button class="btn btn-outline-info btn-block btn-espaciado" type="reset">Resetear formulario</button>
+
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+
+                <button  class="btn btn-outline-success btn-espaciado btn-block" onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Region</button>
+            </div>
+            <div class="col-sm-3">
+
+                <button class="btn btn-outline-danger btn-block btn-espaciado" href="/region"> Regresar</button>
             </div>
         </div>
 
-
     </form>
-    <div class="row">
-        <div class="col-sm-3">
-            <a href="/Region/inicio">
-                <button>Regresar</button>
-            </a>
 
-        </div>
-    </div>
+
+
 
 
     <script>

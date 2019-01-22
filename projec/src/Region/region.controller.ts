@@ -12,8 +12,8 @@ export class RegionController {
 
     }
 
-    @Get('inicio')
-    async inicio(
+    @Get('region')
+    async region(
         @Res() response,
         @Query('accion') accion: string,
         @Query('nombre') nombre: string,
@@ -59,8 +59,8 @@ export class RegionController {
             regiones = await this._regionService.buscar();
         }
 
-        response.render('inicio', {
-            nombre: 'Adrian',
+        response.render('region', {
+            nombre: 'David',
             arreglo: regiones,
             mensaje: mensaje,
             accion: clase
@@ -79,7 +79,7 @@ export class RegionController {
 
         const parametrosConsulta = `?accion=borrar&nombre=${regionEncontrada.nombre}`;
 
-        response.redirect('/Region/inicio' + parametrosConsulta);
+        response.redirect('/Region/region' + parametrosConsulta);
     }
 
     @Get('crear-region')
@@ -120,7 +120,7 @@ export class RegionController {
 
         const parametrosConsulta = `?accion=actualizar&nombre=${region.nombre}`;
 
-        response.redirect('/Region/inicio' + parametrosConsulta);
+        response.redirect('/Region/region' + parametrosConsulta);
 
     }
 
@@ -135,7 +135,7 @@ export class RegionController {
 
         const parametrosConsulta = `?accion=crear&nombre=${region.nombre}`;
 
-        response.redirect('/Region/inicio' + parametrosConsulta)
+        response.redirect('/Region/region' + parametrosConsulta)
     }
 }
 
