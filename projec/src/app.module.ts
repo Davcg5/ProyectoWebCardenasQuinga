@@ -13,41 +13,47 @@ import {LecturaEntity} from "./Lectura/lectura.entity";
 import {SubparcelaEntity} from "./Subparcela/subparcela.entity";
 import {RolEntity} from "./rol/rol.entity";
 import {RegionModule} from "./Region/region.module";
+import {LoginModule} from "./Login/login.module";
 
 @Module({
-    imports: [
-        TypeOrmModule
-            .forRoot({
-                type: 'mysql',
-                host: 'localhost',
-                port: 3306,
+        imports: [
+            TypeOrmModule
+                .forRoot({
+                    type: 'mysql',
+                    host: 'localhost',
+                    port: 3306,
 
-              /*  username: 'root',
-                password: 'password',*/
+                    /*  username: 'root',
+                      password: 'password',*/
 
-                username: 'vinicioQ',
-                password: '98765432',
+                    username: 'vinicioQ',
+                    password: '98765432',
 
-                database: 'webproject',
-                synchronize: true,
-                dropSchema: false,
-                entities: [
-                    UsuarioEntity,
-                    HaciendaEntity,
-                    RegionEntity,
-                    ParcelaEntity,
-                    SensorEntity,
-                    LecturaEntity,
-                    SubparcelaEntity,
-                    RolEntity
-                ]
-            }),
-RegionModule
-    ], // Modulos
-    controllers: [AppController], // Controllers
-    providers: [
-        AppService
-    ], // Servicios
-})
+                    database: 'webproject',
+                    synchronize: true,
+                    dropSchema: false,
+                    entities: [
+                        UsuarioEntity,
+                        HaciendaEntity,
+                        RegionEntity,
+                        ParcelaEntity,
+                        SensorEntity,
+                        LecturaEntity,
+                        SubparcelaEntity,
+                        RolEntity
+                    ]
+                }),
+
+
+            RegionModule,
+            LoginModule
+
+        ], // Modulos
+        controllers: [AppController], // Controllers
+        providers: [
+            AppService
+        ], // Servicios
+    }
+)
 export class AppModule {
 }
