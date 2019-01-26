@@ -16,7 +16,32 @@ export class LoginController {
     loginVista(
         @Res() response
     ) {
-        response.render('login');
+        response.render('inicioLogin/login');
+    }
+
+
+    @Get('home')
+    homeVista(
+        @Res() response
+    ) {
+        response.render('inicioLogin/home')
+    }
+
+
+    @Get('acerca')
+    acercaHome(
+        @Res() response
+    ) {
+        response.render('inicioLogin/acerca')
+
+    }
+
+    @Get('contactanos')
+    contactanosHome(
+        @Res() response
+    ) {
+        response.render('inicioLogin/contactanos')
+
     }
 
 

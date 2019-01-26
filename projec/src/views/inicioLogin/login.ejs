@@ -4,9 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 
     <title>LOGIN</title>
 
@@ -15,8 +13,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-    <style>
+    <!--<link rel="stylesheet"  type="text/css" href="/projec/bootstrap-4.0.0-dist/css/mis-estilos.css"> -->
 
+    <style type="text/css">
 
         html {
             background-color: #56baed;
@@ -294,23 +293,25 @@
 
     </style>
 
+
 </head>
 
 
-<body>
+<body class="text-center">
 
 
 <nav>
 
+
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link active" href="/Login/home">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Acerca</a>
+            <a class="nav-link" href="/Login/acerca">Acerca</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Contáctanos</a>
+            <a class="nav-link" href="/Login/contactanos">Contáctanos</a>
         </li>
 
     </ul>
@@ -334,7 +335,7 @@
             <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
             <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
 
-            <select class="form-control-sm fadeIn fourth" >
+            <select class="form-control-sm fadeIn fourth">
                 <option value="administrador">Administrador</option>
                 <option value="encargado">Encargado</option>
             </select>
