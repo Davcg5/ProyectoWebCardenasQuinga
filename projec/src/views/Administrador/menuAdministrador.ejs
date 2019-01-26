@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Administracion</title>
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body class="center">
+
+
+<div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker2'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker2').datetimepicker({
+                    locale: 'ru'
+                });
+            });
+        </script>
+    </div>
+</div>
+
+
+<div class="container">
+
+    <center>
+        <h1 class="center">BIENVENIDOS</h1>
+    </center>
+
+
+    <center>
+        <div class="row">
+
+
+            <div class="col-sm">
+                <a type='button' href="" value='Boton' style='width:200px; height:200px'></a>
+
+            </div>
+
+            <div class="col-sm">
+                <a type='button' href="" value='Boton' style='width:200px; height:200px'></a>
+
+            </div>
+
+            <div class="col-sm">
+                <a type='button' href="" value='Boton' style='width:200px; height:200px'></a>
+
+            </div>
+
+            <div class="col-sm">
+                <a type='button' href="" value='Boton' style='width:200px; height:200px'></a>
+
+            </div>
+
+
+        </div>
+
+    </center>
+</div>
+
+
+<script>
+    $(function () {
+        $.datepicker.setDefaults($.datepicker.regional["es"]);
+        $("#datepicker").datepicker({
+            firstDay: 1
+        });
+    });
+</script>
+
+</body>
+</html>
+
+

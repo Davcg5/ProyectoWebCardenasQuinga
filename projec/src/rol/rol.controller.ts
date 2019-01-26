@@ -2,7 +2,7 @@ import {Controller, Get, Res} from "@nestjs/common";
 import {UsuarioService} from "../Usuario/usuario.service";
 import {RolService} from "./rol.service";
 
-@Controller('Administracion')
+@Controller('Rol')
 export class RolController {
 
 
@@ -12,13 +12,11 @@ export class RolController {
 
     }
 
-    @Get('menu')
+    @Get('menuAdministrador')
     admistracionMenuVis(
         @Res() response
     ) {
-        response.render('');
-
-
+        response.render('Administrador/menuAdministrador');
     }
 
 
