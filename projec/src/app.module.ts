@@ -14,6 +14,7 @@ import {SubparcelaEntity} from "./Subparcela/subparcela.entity";
 import {RolEntity} from "./rol/rol.entity";
 import {RegionModule} from "./Region/region.module";
 import {LoginModule} from "./Login/login.module";
+import {UsuarioModule} from "./Usuario/usuario.module";
 
 @Module({
         imports: [
@@ -46,8 +47,7 @@ import {LoginModule} from "./Login/login.module";
 
 
             RegionModule,
-            LoginModule
-
+            UsuarioModule
         ], // Modulos
         controllers: [AppController], // Controllers
         providers: [

@@ -1,13 +1,13 @@
 import {Controller, Get, Res} from "@nestjs/common";
-
-import {LoginService} from "./login.service";
+import {LoginService} from "../Login/login.service";
+import {UsuarioService} from "./usuario.service";
 
 @Controller('Login')
 
-export class LoginController {
+export class UsuarioController {
 
     constructor(
-        private readonly __loginService: LoginService
+        private readonly __usuarioService: UsuarioService
     ) {
 
     }
