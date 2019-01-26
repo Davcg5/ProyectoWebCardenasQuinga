@@ -13,8 +13,8 @@ import {LecturaEntity} from "./Lectura/lectura.entity";
 import {SubparcelaEntity} from "./Subparcela/subparcela.entity";
 import {RolEntity} from "./rol/rol.entity";
 import {RegionModule} from "./Region/region.module";
-import {LoginModule} from "./Login/login.module";
 import {UsuarioModule} from "./Usuario/usuario.module";
+import {RolModules} from "./rol/rol.modules";
 
 @Module({
         imports: [
@@ -47,7 +47,8 @@ import {UsuarioModule} from "./Usuario/usuario.module";
 
 
             RegionModule,
-            UsuarioModule
+            UsuarioModule,
+            RolModules
         ], // Modulos
         controllers: [AppController], // Controllers
         providers: [

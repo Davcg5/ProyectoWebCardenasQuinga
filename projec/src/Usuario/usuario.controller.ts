@@ -1,6 +1,5 @@
 import {Controller, Get, Res} from "@nestjs/common";
-import {LoginService} from "../Login/login.service";
-import {UsuarioService} from "./usuario.service";
+ import {UsuarioService} from "./usuario.service";
 
 @Controller('Login')
 
