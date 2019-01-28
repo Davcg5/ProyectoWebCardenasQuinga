@@ -17,10 +17,47 @@
 <body>
 <div class="container">
 
+    <% const existeMensaje = typeof mensaje !== "undefined" ? true : false; %>
 
 
 
-    <form action="/Region/" method="get">
+    <% if(existeMensaje){ %>
+        <div class="animated fadeOut alert alert-<%= accion %>" role="alert">
+            MENSAJE: <%= mensaje %>
+        </div>
+    <% } %>
+
+
+
+
+    <% var apellido = 'Cardenas' %>
+    <!-- h1 -> Header 1 -->
+    <h1> Lista de regiones</h1>
+    <p>Crea, edita, actualiza y busca regiones. Puedes buscar
+        regiones por nombre o descripcion.
+    </p>
+    <!-- p -> parrafo -->
+
+    <!-- a -> anchor-->
+
+
+    <script>
+        function holaMundo(evento) {
+            console.log(evento)
+            evento.preventDefault();
+            const respuesta = confirm('¿Estas seguro?')
+            console.log('Hola mundo')
+        }
+        function borrar(evento) {
+            const respuesta = confirm('¿Estas seguro?')
+            if (!respuesta) {
+                event.preventDefault();
+            }
+        }
+    </script>
+
+
+    <form action="/Region/Region" method="get">
         <div class="row">
             <div class="col-sm-9">
 
@@ -100,10 +137,6 @@
         </tbody>
     </table>
 
-
-</div>
-<% var creando = typeof region === "undefined" ? true : false; %>
-</div>
 
 
 

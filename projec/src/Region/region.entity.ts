@@ -9,10 +9,10 @@ export class RegionEntity {
     @Index()
     @Column(
         {
-            name: 'nombreRegion',
+            name: 'nombre',
             type: 'varchar',
             length: 50,
-            default:""
+            default:"nombre"
         }
     )
     nombre: string;

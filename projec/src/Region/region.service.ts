@@ -25,10 +25,11 @@ export class RegionService {
         // Instanciar una entidad -> .create()
         const regionEntity = this._regionRepository
             .create(nuevaRegion)
-
+console.log(regionEntity)
         // Guardar una entidad en la BDD -> .save()
         const regionCreada = await this._regionRepository
             .save(regionEntity);
+console.log(regionCreada)
 
         return regionCreada;
     }
