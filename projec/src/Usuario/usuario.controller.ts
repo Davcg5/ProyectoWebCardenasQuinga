@@ -1,7 +1,7 @@
 import {Controller, Get, Res} from "@nestjs/common";
  import {UsuarioService} from "./usuario.service";
 
-@Controller('Login')
+@Controller('Usuario')
 
 export class UsuarioController {
 
