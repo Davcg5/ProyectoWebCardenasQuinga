@@ -1,5 +1,5 @@
 import {Controller, Get, Res} from "@nestjs/common";
- import {UsuarioService} from "./usuario.service";
+import {UsuarioService} from "./usuario.service";
 
 @Controller('Usuario')
 
@@ -40,6 +40,14 @@ export class UsuarioController {
         @Res() response
     ) {
         response.render('inicioLogin/contactanos')
+
+    }
+
+    @Get('CrearUsuario')
+    crearUsuario(
+        @Res() response
+    ) {
+        response.render('UsuarioPantalla/crearUsuario')
 
     }
 
