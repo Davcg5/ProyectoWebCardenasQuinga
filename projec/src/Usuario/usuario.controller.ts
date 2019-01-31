@@ -23,7 +23,6 @@ export class UsuarioController {
         @Query('busqueda') busqueda: string,
         @Session() sesion
     ) {
-        // if(sesion.){
         let mensaje; // undefined
         let clase; // undefined
 
@@ -45,98 +44,41 @@ export class UsuarioController {
             }
         }
 
-        let usuario: UsuarioEntity[];
+        let usuarios: UsuarioEntity[];
         if (busqueda) {
             const consulta = {
                 where: [
                     {
-                        nombre: Like(`%${busqueda}%`)
+                        nombreUsuario: Like(`%${busqueda}%`)
 
                     },
                     {
-                        cedula: Like(`%${busqueda}%`)
+                        cedulaUsuario: Like(`%${busqueda}%`)
                     }
                 ]
             };
 
-            usuario = await this.__usuarioService.buscar(consulta);
+            usuarios = await this.__usuarioService.buscar(consulta);
 
 
         }
         else {
-            usuario = await this.__usuarioService.buscar();
+            usuarios = await this.__usuarioService.buscar();
         }
-        response.render('usuario',{
-            nombre: 'Vinicio',
-            arreglo: usuario,
-            mensaje: mensaje,
-            accion: clase
+        response.render('UsuarioPantalla/crear-usuario', {
+            nombreUsuario: 'Vinicio',
+            arregloUsuario: usuarios,
+            mensajeUsuario: mensaje,
+            accionUsuario: clase
 
-        });
+        })
 
-        //}
-        //else{
-        //throw new ForbiddenException({mensaje:'No puedes entrar'});
-
-        //}
-    }
-
-    @Post('borrar/:idUsuario')
-    async borrarUsuario(
-        @Param('idUsuario') idUsuario: string,
-        @Res() response
-    ) {
-        const usuarioEncontrado = await this.__usuarioService.buscarPorId(+idUsuario)
-        const parametrosConsulta = `?accion=borrar&nombre=${usuarioEncontrado.nombreUsuario}`
-        response.redirect('Usuario/usuario' + parametrosConsulta)
 
     }
 
-
-    @Get('CrearUsuario')
-    crearUsuario(
-        @Res() response
-    ) {
-        response.render('UsuarioPantalla/crearUsuario')
-
-    }
-
-
-    @Get('actualizar-Usuario/:idUsuario')
-    async actualizarUsuario(
-        @Param('idUsuario') idUsuario: string,
-        @Res() response
-    ) {
-        const usuarioAActualizar = await this.__usuarioService
-            .buscarPorId(Number(idUsuario));
-
-        response.render(
-            'crear-usuario', {
-                region: usuarioAActualizar
-            }
-        )
-    }
-
-
-    @Post('actualizar-usuario/:idRegion')
-    async actualizarUsuarioFormulario(
-        @Param('idUsuario') idUsuario: string,
-        @Res() response,
-        @Body() usuario: Usuario
-    ) {
-        usuario.idUsuario = +idUsuario;
-
-        await this.__usuarioService.actualizar(+idUsuario, usuario);
-
-        const parametrosConsulta = `?accion=actualizar&nombre=${usuario.nombreUsuario}`;
-
-        response.redirect('/Usuario/usuario' + parametrosConsulta);
-
-    }
-
-
+//CREAR USUARIO Y GUARDAR EN LA BASE DE DATOS
     @Post('crear-usuario')
-    async crearUsuarioFormulario(
+    async crearRegionFormulario(
         @Body() usuario: Usuario,
         @Res() response
     ) {
@@ -145,7 +87,25 @@ export class UsuarioController {
 
         const parametrosConsulta = `?accion=crear&nombre=${usuario.nombreUsuario}`;
 
-        response.redirect('/Usuario/CrearUsuario' + parametrosConsulta)
+        response.redirect('/Usuario/usuario' + parametrosConsulta)
+    }
+
+
+//BORRAR USUARIO
+
+    @Post('borrar/:idUsuario')
+    async borrar(
+        @Param('idUsuario') idUsuario: string,
+        @Res() response
+    ) {
+        const usuarioEncontrada = await this.__usuarioService
+            .buscarPorId(+idUsuario);
+
+        await this.__usuarioService.borrar(Number(idUsuario));
+
+        const parametrosConsulta = `?accion=borrar&nombre=${usuarioEncontrada.nombreUsuario}`;
+
+        response.redirect('/Usuario/usuario' + parametrosConsulta);
     }
 
 

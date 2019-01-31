@@ -7,15 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Region</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet"
           href="/bootstrap-4.0.0-dist/css/animate.css">
 
- </head>
+</head>
 <body>
 <div class="container">
-
-
 
 
     <form action="/Region/" method="get">
@@ -34,7 +33,8 @@
             <div class="col-sm-3">
 
                 <button class="btn btn-outline-info btn-block btn-buscar"
-                        type="submit">Buscar</button>
+                        type="submit">Buscar
+                </button>
 
             </div>
         </div>
@@ -53,8 +53,6 @@
     <h2> Arreglo </h2>
 
 
-
-
     <table class="table table-hover animated fadeInUp">
         <caption>Lista de Regiones</caption>
         <!-- tr -> table row -->
@@ -69,6 +67,7 @@
         </thead>
         <!-- tr -> table row -->
         <tbody>
+
         <% arreglo.forEach((region)=>{ %>
             <tr>
                 <!-- td -> table detail -->
@@ -104,6 +103,16 @@
 </div>
 
 
+<script>
+    function borrar(evento) {
 
+        const respuesta = confirm('¿Estas seguro?')
+
+        if (!respuesta) {
+            event.preventDefault();
+        }
+
+    }
+</script>
 </body>
 </html>
