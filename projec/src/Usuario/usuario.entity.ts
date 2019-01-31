@@ -36,6 +36,12 @@ export class UsuarioEntity {
     })
     telefonoUsuario: string;
 
+    @Column({
+        nullable: false
+    })
+    contraseñaUsuario: string;
+
+
     @BeforeInsert()
     antesDeInsertar() {
         console.log('Ejecutandome antes de insertar');

@@ -1,10 +1,186 @@
-<html>
+<!doctype html>
+<html lang="es">
 
 <head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Usuario</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <style type="text/css">
+
+        div.solid {
+            border-style: ridge;
+            height: auto;
+            width: auto;
+        }
+
+
+    </style>
+
 
 </head>
 
 <body>
+
+
+<center>
+    <div class="container">
+
+        <div class="solid">
+            <!--   <h1>Bienvenidos</h1>-->
+            <nav>
+                <ul class="nav justify-content-end">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Rol/menuAdministrador" style="color: black">Ménu Principal</a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+            <% var creando = typeof region === "undefined" ? true : false; %>
+
+            <h1> <%= creando ? 'Crear' : 'Actualizar' %> Usuario</h1>
+
+            <form action="/Usuario/<%= creando ? 'crear' : 'actualizar' %>-usuario/<%= creando ? '' : usuario.idUsuario %>"
+                  method="POST">
+
+                <div class="row">
+                    <div class="col">
+                        <label for="nombreUsuario">Nombre:</label>
+                        <input id="nombreUsuario" type="text"
+                               value="<%= creando ? '' : usuario.nombreUsuario %>"
+                               class="form-control-sm" name="nombreUsuario">
+
+                    </div>
+                    <div class="col">
+                        <label for="cedulaUsuario">Cédula:</label>
+                        <input id="cedulaUsuario" type="number"
+                               value="<%= creando ? '' : usuario.cedulaUsuario %>"
+                               class="form-control-sm" name="cedulaUsuario">
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="direccionUsuario">Direcciòn:</label>
+                        <input id="direccionUsuario" type="text"
+                               value="<%= creando ? '' : usuario.direccionUsuario %>"
+                               class="form-control-sm" name="direccionUsuario">
+
+                    </div>
+                    <div class="col">
+                        <label for="telefonoUsuario">Telefono:</label>
+                        <input id="telefonoUsuario" type="number"
+                               value="<%= creando ? '' : usuario.telefonoUsuario %>"
+                               class="form-control-sm" name="telefonoUsuario">
+                    </div>
+
+                    <div class="col">
+                        <label for="contraseñaUsuario">Contraseña:</label>
+                        <input id="contraseñaUsuario" type="password"
+                               value="<%= creando ? '' : usuario.contraseñaUsuario %>"
+                               class="form-control-sm" name="contraseñaUsuario">
+                    </div>
+                    <br>
+                    <br>
+
+                </div>
+
+                <div class="align-top">
+                    <form class="align-top">
+
+
+                        <label for="rol">Roles:</label>
+                        <select class="form-control-sm" id="rol">
+                            <option>Administrador</option>
+                            <option>Encargado</option>
+                        </select>
+
+                    </form>
+                    <button class="btn btn-primary"
+                            onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Usuario
+                    </button>
+                </div>
+
+            </form>
+            <br>
+
+            <table class="table table-striped">
+                <thead>
+                <tr align="center">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Cédula</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col"> Teléfono</th>
+                    <th scope="col"> Rol</th>
+                    <th scope="col"> Accion</th>
+                </tr>
+                </thead>
+
+
+                <tbody>
+                <% arreglo.forEach((usuario)=>{ %>
+                    <tr>
+                        <td><%= usuario.nombreUsuario %></td>
+                        <td><%= usuario.cedulaUsuario %></td>
+                        <td><%= usuario.direccionUsuario %></td>
+                        <td><%= usuario.telefonoUsuario %></td>
+                    </tr>
+                <% }) %>
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+    </div>
+</center>
+
+
+<script>
+    function validarNombre(evento) {
+        // 0) Obtener el valor del campo
+        // 1) Revisar el campo no este vacio
+        // 2) Revisar el campo tenga 3 char
+        const inputNombre = document
+            .getElementById("nombre");
+        const nombre = inputNombre.value;
+        if (nombre.length < 3) {
+            event.preventDefault()
+            alert('Tu nombre es muy corto')
+        } else {
+
+        }
+
+    }
+</script>
+
+
+</div>
+<% var creando = typeof region === "undefined" ? true : false; %>
+</div>
+
 
 </body>
 </html>
