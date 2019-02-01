@@ -54,7 +54,13 @@ export class UsuarioController {
                     },
                     {
                         cedulaUsuario: Like(`%${busqueda}%`)
-                    }
+                    },
+                    {
+                        direccionUsuario: Like(`%${busqueda}%`)
+                    },
+                    {
+                        telefonoUsuario: Like(`%${busqueda}%`)
+                    },
                 ]
             };
 
@@ -65,7 +71,7 @@ export class UsuarioController {
         else {
             usuarios = await this.__usuarioService.buscar();
         }
-        response.render('UsuarioPantalla/crear-usuario', {
+        response.render('UsuarioPantalla/usuario', {
             nombreUsuario: 'Vinicio',
             arregloUsuario: usuarios,
             mensajeUsuario: mensaje,
@@ -74,6 +80,17 @@ export class UsuarioController {
         })
 
 
+    }
+
+
+//se inicializa la pantalla de crear usuario
+    @Get('crear-usuario')
+    crearRegion(
+        @Res() response
+    ) {
+        response.render(
+            'UsuarioPantalla/crear-usuario'
+        )
     }
 
 //CREAR USUARIO Y GUARDAR EN LA BASE DE DATOS
@@ -106,6 +123,42 @@ export class UsuarioController {
         const parametrosConsulta = `?accion=borrar&nombre=${usuarioEncontrada.nombreUsuario}`;
 
         response.redirect('/Usuario/usuario' + parametrosConsulta);
+    }
+
+
+    /////actualizar datos del usuario
+
+    @Get('actualizar-usuario/:idUsuario')
+    async actualizarUsuario(
+        @Param('idUsuario') idUsuario: string,
+        @Res() response
+    ) {
+        const usuarioAActualizar = await this
+            .__usuarioService
+            .buscarPorId(Number(idUsuario));
+
+        response.render(
+            'UsuarioPantalla/crear-usuario', {
+                usuario: usuarioAActualizar
+            }
+        )
+    }
+
+
+    @Post('actualizar-usuario/:idUsuario')
+    async actualizarUsuarioFormulario(
+        @Param('idUsuario') idUsuario: string,
+        @Res() response,
+        @Body() usuario: Usuario
+    ) {
+        usuario.idUsuario = +idUsuario;
+
+        await this.__usuarioService.actualizar(+idUsuario, usuario);
+
+        const parametrosConsulta = `?accion=actualizar&nombre=${usuario.nombreUsuario}`;
+
+        response.redirect('/Usuario/usuario' + parametrosConsulta);
+
     }
 
 

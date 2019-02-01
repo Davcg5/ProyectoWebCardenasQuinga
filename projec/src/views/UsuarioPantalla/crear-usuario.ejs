@@ -42,23 +42,16 @@
 
 <center>
     <div class="container">
-
+        <br>
         <div class="solid">
-            <!--   <h1>Bienvenidos</h1>-->
-            <nav>
-                <ul class="nav justify-content-end">
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Rol/menuAdministrador" style="color: black">Ménu Principal</a>
-                    </li>
-
-                </ul>
-
-            </nav>
+            <br>
 
             <% var creando = typeof usuario === "undefined" ? true : false; %>
 
             <h1> <%= creando ? 'Crear' : 'Actualizar' %> Usuario</h1>
+            <p><%= creando ? 'Creando' : 'Actualizando' %> un Usuario.</p>
+
 
             <form action="/Usuario/<%= creando ? 'crear' : 'actualizar' %>-usuario/<%= creando ? '' : usuario.idUsuario %>"
                   method="POST">
@@ -81,6 +74,7 @@
                 <br>
 
                 <div class="row">
+
                     <div class="col">
                         <label for="direccionUsuario">Direcciòn:</label>
                         <input id="direccionUsuario" type="text"
@@ -88,110 +82,52 @@
                                class="form-control-sm" name="direccionUsuario">
 
                     </div>
+
                     <div class="col">
                         <label for="telefonoUsuario">Telefono:</label>
                         <input id="telefonoUsuario" type="number"
                                value="<%= creando ? '' : usuario.telefonoUsuario %>"
                                class="form-control-sm" name="telefonoUsuario">
                     </div>
+                </div>
 
+                <br>
+                <div class="row">
                     <div class="col">
                         <label for="contraseñaUsuario">Contraseña:</label>
                         <input id="contraseñaUsuario" type="password"
                                value="<%= creando ? '' : usuario.contraseñaUsuario %>"
                                class="form-control-sm" name="contraseñaUsuario">
-                    </div>
-                    <br>
-                    <br>
 
-                </div>
-                <% const existeMensaje = typeof mensaje !== "undefined" ? true : false; %>
-
-                <% if(existeMensaje){ %>
-
-                    <div class="animated fadeOut alert alert-<%= accion %>" role="alert">
-                        MENSAJE: <%= mensaje %>
                     </div>
 
-                <% } %>
-
-                <div class="align-top">
-                    <form class="align-top">
-
+                    <div class="col">
 
                         <label for="rol">Roles:</label>
                         <select class="form-control-sm" id="rol">
                             <option>Administrador</option>
                             <option>Encargado</option>
                         </select>
-
-                    </form>
-                    <button class="btn btn-outline-primary"
-                            onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Usuario
-                    </button>
+                    </div>
                 </div>
+                <br>
+
+                <div class="col-sm-3">
+
+                    <button class="btn btn-outline-success btn-espaciado btn-block"
+                            onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Region
+                    </button>
+
+                    <a class="btn btn-outline-danger btn-block btn-espaciado" href="/Usuario/usuario">
+                        Regresar
+                    </a>
+                </div>
+
+
             </form>
+
+
             <br>
-            <table class="table table-striped ">
-                <thead>
-                <tr align="center">
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Cédula</th>
-                    <th scope="col">Dirección</th>
-                    <th scope="col"> Teléfono</th>
-                    <th scope="col"> Accion</th>
-                </tr>
-                </thead>
-
-
-                <tbody>
-                <% arregloUsuario.forEach((usuarios)=>{ %>
-
-                    <tr>
-                        <td align="center">
-                            <%= usuarios.nombreUsuario %>
-                        </td>
-                        <td align="center">
-                            <%= usuarios.cedulaUsuario %>
-                        </td>
-                        <td align="center">
-                            <%= usuarios.direccionUsuario %>
-                        </td>
-
-                        <td align="center">
-                            <%= usuarios.telefonoUsuario %>
-                        </td>
-
-                        <td align="center">
-
-                            <form action="/Usuario/borrar/<%= usuarios.idUsuario %>"
-                                  method="post">
-                                <button type="submit"
-                                        class="btn btn-outline-danger btn-block btn-espaciado " onclick="borrar(event)">
-                                    Eliminar
-                                </button>
-
-
-                            </form>
-
-                            <form>
-
-                                <button type="submit"
-                                        class="btn btn-outline-secondary btn-block btn-espaciado">Actualizar
-                                </button>
-                            </form>
-                        </td>
-
-
-                    </tr>
-
-                <% }) %>
-                </tbody>
-
-
-            </table>
-
-
         </div>
     </div>
 </center>
@@ -210,16 +146,6 @@
             alert('Tu nombre es muy corto')
         } else {
 
-        }
-
-    }
-
-    function borrar(evento) {
-
-        const respuesta = confirm('¿Estas seguro de Eliminar?')
-
-        if (!respuesta) {
-            event.preventDefault();
         }
 
     }
