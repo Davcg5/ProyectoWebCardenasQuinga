@@ -75,7 +75,8 @@ export class UsuarioController {
             nombreUsuario: 'Vinicio',
             arregloUsuario: usuarios,
             mensajeUsuario: mensaje,
-            accionUsuario: clase
+            accionUsuario: clase,
+            session: sesion.usuario
 
         })
 
@@ -160,9 +161,6 @@ export class UsuarioController {
         response.redirect('/Usuario/usuario' + parametrosConsulta);
 
     }
-
-
-
 
 
 }

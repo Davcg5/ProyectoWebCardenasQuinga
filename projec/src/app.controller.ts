@@ -24,9 +24,7 @@ export class AppController {
 
 
         if (identificado) {
-
             sesion.usuario = cedula;
-
             response.redirect('/Rol/menuAdministrador')
 
         } else {
@@ -53,6 +51,7 @@ export class AppController {
         response.redirect('/Login/login');
 
     }
+
 
     @Get('home')
     homeVista(

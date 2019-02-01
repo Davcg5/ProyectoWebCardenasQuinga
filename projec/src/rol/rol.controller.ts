@@ -19,7 +19,9 @@ export class RolController {
         @Session() sesion
     ) {
         console.log(sesion);
-        response.render('Administrador/menuAdministrador');
+        response.render('Administrador/menuAdministrador', {
+            sessionUsuario: sesion.usuario
+        });
     }
 
 
