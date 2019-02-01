@@ -22,8 +22,10 @@ export class AppController {
         const identificado = await this._usuarioService
             .login(cedula, contraseña);
 
+
         if (identificado) {
 
+            sesion.usuario = cedula;
 
             response.redirect('/Rol/menuAdministrador')
 

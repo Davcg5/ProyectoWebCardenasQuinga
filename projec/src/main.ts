@@ -13,7 +13,7 @@ async function bootstrap() {
             secret: 'epn ingenieria en sitemasSS',
             resave: false,
             saveUninitialized: true,
-            cookie: {secure: true}
+            cookie: {secure: false}
         })
     )
     await app.listen(3001);
