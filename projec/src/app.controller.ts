@@ -1,6 +1,7 @@
 import {BadRequestException, Body, Controller, Get, HttpCode, Post, Res, Session} from '@nestjs/common';
 import {AppService} from './app.service';
 import {UsuarioService} from "./Usuario/usuario.service";
+import {ok} from "assert";
 
 @Controller('Login')
 export class AppController {
@@ -13,18 +14,16 @@ export class AppController {
     @Post('login')
     @HttpCode(200)
     async loginMetodo(
-        @Body('celula') celula: string,
-        @Body('password') password: string,
+        @Body('cedula') cedula: string,
+        @Body('contraseña') contraseña: string,
         @Res() response,
         @Session() sesion
     ) {
         const identificado = await this._usuarioService
-
-            .login(celula, password);
+            .login(cedula, contraseña);
 
         if (identificado) {
 
-            sesion.usuario = celula;
 
             response.redirect('/Rol/menuAdministrador')
 
