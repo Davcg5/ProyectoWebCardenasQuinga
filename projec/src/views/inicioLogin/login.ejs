@@ -305,13 +305,13 @@
 
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <a class="nav-link active" href="/Usuario/home">Home</a>
+            <a class="nav-link active" href="/Login/home">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/Usuario/acerca">Acerca</a>
+            <a class="nav-link" href="/Login/acerca">Acerca</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/Usuario/contactanos">Contáctanos</a>
+            <a class="nav-link" href="/Login/contactanos">Contáctanos</a>
         </li>
 
     </ul>
@@ -331,7 +331,7 @@
         </div>
 
         <!-- Login Form -->
-        <form method="get" href="">
+        <form method="post" href="/Login/login">
             <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
             <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
 
@@ -342,23 +342,41 @@
             <br>
             <br>
 
-            <a href="/Rol/menuAdministrador" class="btn btn-primary fadeIn fourth">Iniciar Sesión</a>
-
+            <button type="submit" class="btn btn-outline-info btn-espaciado fadeIn fourth"
+                    onclick="validarNombre(event)">Iniciar Sesión
+            </button>
 
 
         </form>
 
         <!-- Remind Passowrd -->
         <div id="formFooter">
-        <!--    <a class="underlineHover" href="#">Forgot Password?</a>-->
+            <!--    <a class="underlineHover" href="#">Forgot Password?</a>-->
         </div>
 
     </div>
 </div>
 
 
-</body>
+<script>
+    function validarNombre(evento) {
+        // 0) Obtener el valor del campo
+        // 1) Revisar el campo no este vacio
+        // 2) Revisar el campo tenga 3 char
+        const inputNombre = document
+            .getElementById("login");
+        const nombre = inputNombre.value;
+        if (nombre.length < 3) {
+            event.preventDefault()
+            alert('Ingrese Credenciales por favor!!!')
+        } else {
 
+        }
+
+    }
+</script>
+
+</body>
 </html>
 
 

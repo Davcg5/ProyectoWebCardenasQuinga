@@ -138,7 +138,7 @@ export class UsuarioController {
             .buscarPorId(Number(idUsuario));
 
         response.render(
-            'UsuarioPantalla/crear-usuario', {
+            'UsuarioPantalla/crear-usuario', {//ir a la pantalla de crear-usuario
                 usuario: usuarioAActualizar
             }
         )
@@ -162,37 +162,7 @@ export class UsuarioController {
     }
 
 
-    @Get('login')
-    loginVista(
-        @Res() response
-    ) {
-        response.render('inicioLogin/login');
-    }
 
-
-    @Get('home')
-    homeVista(
-        @Res() response
-    ) {
-        response.render('inicioLogin/home')
-    }
-
-
-    @Get('acerca')
-    acercaHome(
-        @Res() response
-    ) {
-        response.render('inicioLogin/acerca')
-
-    }
-
-    @Get('contactanos')
-    contactanosHome(
-        @Res() response
-    ) {
-        response.render('inicioLogin/contactanos')
-
-    }
 
 
 }

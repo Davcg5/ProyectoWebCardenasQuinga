@@ -94,28 +94,28 @@
 
 
 
-    <script>
-        function validarNombre(evento) {
-            // 0) Obtener el valor del campo
-            // 1) Revisar el campo no este vacio
-            // 2) Revisar el campo tenga 3 char
-            const inputNombre = document
-                .getElementById("nombre");
-            const nombre = inputNombre.value;
-            if (nombre.length < 3) {
-                event.preventDefault()
-                alert('Tu nombre es muy corto')
-            }else{
 
-            }
-
-        }
-    </script>
 
 
 </div>
 
+<script>
+    function validarNombre(evento) {
+        // 0) Obtener el valor del campo
+        // 1) Revisar el campo no este vacio
+        // 2) Revisar el campo tenga 3 char
+        const inputNombre = document
+            .getElementById("nombre");
+        const nombre = inputNombre.value;
+        if (nombre.length < 3) {
+            event.preventDefault()
+            alert('Tu nombre es muy corto')
+        }else{
 
+        }
+
+    }
+</script>
 
 </body>
 </html>

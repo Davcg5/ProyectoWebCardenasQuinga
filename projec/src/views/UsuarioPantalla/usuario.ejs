@@ -67,34 +67,37 @@
 
             <br>
             <br>
-            <form action="/Usuario/usuario" method="get" >
-                <div class="row">
-                    <div class="col-sm-7">
+            <div class="container" align="center">
+                <form action="/Usuario/usuario" method="get">
 
-                        <div class="form-group">
-                            <input id="busqueda"
-                                   type="text"
-                                   class="form-control"
-                                   name="busqueda"
-                                   placeholder="Buscar Usuario" >
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <input id="busqueda"
+                                       type="text"
+                                       class="form-control"
+                                       name="busqueda"
+                                       placeholder="Buscar Usuario">
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <button class="btn  btn-outline-info btn-buscar"
+                                    type="submit">Buscar
+                            </button>
                         </div>
                     </div>
 
-                    <div class="">
-                        <button class="btn  btn-outline-info btn-buscar"
-                                type="submit">Buscar
-                        </button>
-                    </div>
-                </div>
-            </form>
 
-            <br>
+                </form>
+            </div>
             <br>
             <table class="table table-striped ">
                 <thead>
                 <tr align="center">
                     <th scope="col">Nombre</th>
                     <th scope="col">Cédula</th>
+                    <th scope="col">Contraseña</th>
                     <th scope="col">Dirección</th>
                     <th scope="col"> Teléfono</th>
                     <th scope="col"> Accion</th>
@@ -111,6 +114,10 @@
                         </td>
                         <td align="center">
                             <%= usuario.cedulaUsuario %>
+                        </td>
+
+                        <td align="center">
+                            <%= usuario.contraseñaUsuario %>
                         </td>
                         <td align="center">
                             <%= usuario.direccionUsuario %>
