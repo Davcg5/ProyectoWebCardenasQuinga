@@ -8,7 +8,7 @@
         }
     </style>
     <meta charset="UTF-8">
-    <title>Region</title>
+    <title>Hcienda</title>
 </head>
 <body>
 <!doctype html>
@@ -18,7 +18,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Region</title>
+    <title>Hacienda</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet"
@@ -29,37 +29,49 @@
 </head>
 <body>
 <div class="container">
-    <% var creando = typeof region === "undefined" ? true : false; %>
+    <% var creando = typeof hacienda === "undefined" ? true : false; %>
 
-    <h1> <%= creando ? 'Crear' : 'Actualizar' %> Region</h1>
-    <p><%= creando ? 'Creando' : 'Actualizando' %> un region.</p>
+    <h1> <%= creando ? 'Crear' : 'Actualizar' %> Hacienda</h1>
+    <p><%= creando ? 'Creando' : 'Actualizando' %> una hacienda.</p>
 
-    <form action="/Region/<%= creando ? 'crear' : 'actualizar' %>-region/<%= creando ? '' : region.id %>"
+    <form action="/Hacienda/<%= creando ? 'crear' : 'actualizar' %>-hacienda/<%= creando ? '' : hacienda.id %>"
           method="POST">
         <div class="row">
             <div class="col-sm-3">
 
-                    <label for="nombre" >Region</label>
+                <label for="nombre" >Hacienda</label>
             </div>
-                    <div class="col-sm-6">
-                    <input id="nombre"
-                           value="<%= creando ? '' : region.nombre %>"
-                           name="nombre" type="text">
-                    </div>
+            <div class="col-sm-6">
+                <input id="nombre"
+                       value="<%= creando ? '' : hacienda.nombre %>"
+                       name="nombre" type="text">
+            </div>
 
         </div>
 
         <div class="row">
             <div class="col-sm-3">
 
-                    <label for="descripcion">Descripcion</label>
+                <label for="direccion">Direccion</label>
             </div>
             <div class="col-sm-6">
-                    <textarea name="descripcion"
-                              id="descripcion"
+                    <textarea name="direccion"
+                              id="direccion"
                               cols="30"
-                              rows="3"><%= creando ? '' : region.descripcion %>
+                              rows="3"><%= creando ? '' : hacienda.direccion %>
                     </textarea>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+
+                    <label for="telefono" >Telefono</label>
+                </div>
+                <div class="col-sm-6">
+                    <input id="telefono"
+                           value="<%= creando ? '' : hacienda.telefono %>"
+                           name="telefono" type="text">
+                </div>
+
             </div>
 
             <div class="col-sm-3">
@@ -74,20 +86,20 @@
         <div class="row">
             <div class="col-sm-6">
 
-                <button  class="btn btn-outline-success btn-espaciado btn-block" onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Region</button>
+                <button  class="btn btn-outline-success btn-espaciado btn-block" onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Hacienda</button>
             </div>
 
         </div>
 
     </form>
     <div class="row">
-    <div class="col-sm-6">
+        <div class="col-sm-6">
 
 
-        <a  href="/Region/region">
-            <button class="btn btn-outline-danger btn-block btn-espaciado">Regresar</button>
-        </a>
-    </div>
+            <a  href="/Hacienda/hacienda">
+                <button class="btn btn-outline-danger btn-block btn-espaciado">Regresar</button>
+            </a>
+        </div>
 
     </div>
 
@@ -118,5 +130,3 @@
 </html>
 
 
-</body>
-</html>

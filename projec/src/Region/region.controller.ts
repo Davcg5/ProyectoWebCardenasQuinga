@@ -133,10 +133,14 @@ export class RegionController {
         @Res() response
     ) {
         const regionValidada = new RegionCreateDto()
+
         regionValidada.nombre = region.nombre
         regionValidada.descripcion = region.descripcion
+
         const errores: ValidationError[] = await validate(regionValidada)
+
         const hayErrores = errores.length > 0;
+
         if (hayErrores) {
             console.error(errores)
             response.redirect('/Region/crear-region?error=Hay errores')

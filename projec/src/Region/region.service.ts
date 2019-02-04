@@ -69,6 +69,6 @@ export interface Region {
     id: number;
     nombre: string;
     descripcion: string;
-    telefono:string;
+
 
 }

@@ -8,7 +8,7 @@ import {ParcelaEntity} from "../Parcela/parcela.entity";
 export class HaciendaEntity {
 
     @PrimaryGeneratedColumn()
-    idHacienda: number;
+    id: number;
 
     @Index()
     @Column(
@@ -24,17 +24,14 @@ export class HaciendaEntity {
     @Column({
         nullable: false,
     })
-    direccionHacienda: string;
+    direccion: string;
 
     @Column({
         nullable: false
     })
-    telefonoHacienda: string;
+    telefono: string;
 
-    @Column({
-        nullable: false
-    })
-    password: string;
+
 
     @BeforeInsert()
     antesDeInsertar() {

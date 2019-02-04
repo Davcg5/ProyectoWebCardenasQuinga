@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Region</title>
+    <title>Hacienda</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet"
@@ -32,9 +32,9 @@
 
     <% var apellido = 'Cardenas' %>
     <!-- h1 -> Header 1 -->
-    <h1> Lista de regiones</h1>
-    <p>Crea, edita, actualiza y busca regiones. Puedes buscar
-        regiones por nombre o descripcion.
+    <h1> Lista de haciendas</h1>
+    <p>Crea, edita, actualiza y busca haciendas. Puedes buscar
+        haciendas por nombre o descripcion.
     </p>
     <!-- p -> parrafo -->
 
@@ -57,7 +57,7 @@
     </script>
 
 
-    <form action="/Region/Region" method="get">
+    <form action="/Hacienda/Hacienda" method="get">
         <div class="row">
             <div class="col-sm-9">
 
@@ -82,9 +82,9 @@
     <div class="row">
         <div class="col-sm-9"></div>
         <div class="col-sm-3">
-            <a class="quitar-decoracion" href="/Region/crear-region">
+            <a class="quitar-decoracion" href="/Hacienda/crear-hacienda">
                 <button class="btn btn-outline-success btn-espaciado btn-block">
-                    Crear Region
+                    Crear Hacienda
                 </button>
             </a>
         </div>
@@ -95,27 +95,28 @@
 
 
     <table class="table table-hover animated fadeInUp">
-        <caption>Lista de Regiones</caption>
+        <caption>Lista de Haciendas</caption>
         <!-- tr -> table row -->
         <thead>
         <tr>
             <!-- th -> table header -->
             <th width="30%">Nombre</th>
-            <th width="50%">Descripcion</th>
+            <th width="50%">Direccion</th>
 
-            <th width="20%">Acciones</th>
+            <th width="20%">Telefono</th>
         </tr>
         </thead>
         <!-- tr -> table row -->
         <tbody>
-        <% arreglo.forEach((region)=>{ %>
+        <% arreglo.forEach((hacienda)=>{ %>
             <tr>
                 <!-- td -> table detail -->
-                <td><%= region.nombre %></td>
-                <td><%= region.descripcion %></td>
+                <td><%= hacienda.nombre %></td>
+                <td><%= hacienda.direccion %></td>
+                <td><%= hacienda.telefono %></td>
 
                 <td>
-                    <form action="/Region/borrar/<%= region.id %>"
+                    <form action="/Hacienda/borrar/<%= hacienda.id %>"
                           method="post"
                     >
                         <!--<button type="button">Yo no</button>-->
@@ -125,7 +126,7 @@
                                 onclick="borrar(event)">Eliminar
                         </button>
                     </form>
-                    <a class="quitar-decoracion" href="/Region/actualizar-region/<%= region.id %>">
+                    <a class="quitar-decoracion" href="/Hacienda/actualizar-hacienda/<%= hacienda.id %>">
                         <button class="btn btn-outline-info btn-block btn-espaciado"
                                 type="button">
                             Actualizar

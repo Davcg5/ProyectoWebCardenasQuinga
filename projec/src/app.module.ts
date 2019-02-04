@@ -13,6 +13,7 @@ import {LecturaEntity} from "./Lectura/lectura.entity";
 import {SubparcelaEntity} from "./Subparcela/subparcela.entity";
 import {RolEntity} from "./rol/rol.entity";
 import {RegionModule} from "./Region/region.module";
+import {HaciendaModule} from "./hacienda/hacienda.module";
 
 @Module({
     imports: [
@@ -37,7 +38,8 @@ import {RegionModule} from "./Region/region.module";
                     RolEntity
                 ]
             }),
-RegionModule
+RegionModule,
+        HaciendaModule
     ], // Modulos
     controllers: [AppController], // Controllers
     providers: [
