@@ -4,7 +4,7 @@ export class HaciendaCreateDto {
 
     @IsNotEmpty()
     @IsString()
-    @Length(3,15)
+    @Length(3,30)
     nombre:string;
 
     @IsNotEmpty()
@@ -15,5 +15,6 @@ export class HaciendaCreateDto {
     @IsNotEmpty()
     @Length(9, 10)
     telefono:string;
+
 
 }

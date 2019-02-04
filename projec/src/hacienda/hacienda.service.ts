@@ -22,10 +22,9 @@ export class HaciendaService {
 
     async crear(nuevaHacienda: Hacienda): Promise<HaciendaEntity> {
 
-        // Instanciar una entidad -> .create()
         const haciendaEntity = this._haciendaRepository
-            .create(nuevaHacienda)
-        // Guardar una entidad en la BDD -> .save()
+            .create(nuevaHacienda);
+       console.log(nuevaHacienda)
         const haciendaCreada = await this._haciendaRepository
             .save(haciendaEntity);
 
@@ -69,6 +68,7 @@ export interface Hacienda {
     nombre: string;
     direccion: string;
     telefono:string;
+    
 
 
 }

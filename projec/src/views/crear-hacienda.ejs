@@ -60,7 +60,9 @@
                               cols="30"
                               rows="3"><%= creando ? '' : hacienda.direccion %>
                     </textarea>
+
             </div>
+        </div>
             <div class="row">
                 <div class="col-sm-3">
 
@@ -73,6 +75,25 @@
                 </div>
 
             </div>
+        <div class="row">
+            <div class="col-sm-3">
+
+                <label for="region" >Region</label>
+            </div>
+            <div class="col-sm-6">
+                <select class="custom-select" id = region nombre="region">
+                    <option selected>Region...</option>
+                    <%arregloRegiones.forEach((regiones)=>{%>
+                    <option value="<%=regiones.id%>">
+                        <%= regiones.nombre%>
+                    </option>
+
+                    <%})%>
+                </select>
+            </div>
+
+        </div>
+
 
             <div class="col-sm-3">
 
@@ -81,7 +102,7 @@
 
             </div>
 
-        </div>
+
 
         <div class="row">
             <div class="col-sm-6">
@@ -102,6 +123,24 @@
         </div>
 
     </div>
+<script>
+    console.log (hacienda.regiones)
+
+
+    const etiquetaSelectRegiones = document
+        .getElementById('regiones');
+
+    arregloRegiones
+        .forEach(
+            (region) => {
+                const nuevaOption = document.createElement('option');
+                nuevaOption.value = region.id;
+                nuevaOption.innerText = region.nombre;
+                etiquetaSelectRegiones.appendChild(nuevaOption);
+            }
+        )
+re
+</script>
 
     <script>
         function validarNombre(evento) {

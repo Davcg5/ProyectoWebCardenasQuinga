@@ -5,6 +5,7 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 import {HaciendaEntity} from "./hacienda.entity";
 import {HaciendaController} from "./hacienda.controller";
 import {HaciendaService} from "./hacienda.service";
+import {RegionModule} from "../Region/region.module";
 
 
 @Module({
@@ -15,7 +16,8 @@ import {HaciendaService} from "./hacienda.service";
                 [
                     HaciendaEntity
                 ]
-            )
+            ),
+        RegionModule
     ],
     controllers: [
 HaciendaController

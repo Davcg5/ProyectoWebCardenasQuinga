@@ -4,15 +4,19 @@ import {Like} from "typeorm";
 import {HaciendaEntity} from "./hacienda.entity";
 import {HaciendaCreateDto} from "./dto/hacienda-create-dto";
 import {validate, ValidationError} from "class-validator";
+import {Region, RegionService} from "../Region/region.service";
+import {RegionEntity} from "../Region/region.entity";
 
 @Controller('Hacienda')
 export class HaciendaController {
 
+    regiones: Region
+
     constructor(
         private readonly _haciendaService: HaciendaService,
-    ) {
+        private readonly _regionService: RegionService
+    ) {}
 
-    }
 
     @Get('hacienda')
     async hacienda(
@@ -85,11 +89,16 @@ export class HaciendaController {
     }
 
     @Get('crear-hacienda')
-    crearHacienda(
+    async crearHacienda(
         @Res() response
     ) {
+        let regiones:RegionEntity[]
+        regiones=await this._regionService.buscar()
         response.render(
-            'crear-hacienda'
+            'crear-hacienda',
+            {
+                arregloRegiones:regiones
+            }
         )
     }
 
@@ -137,6 +146,7 @@ export class HaciendaController {
         haciendaValidada.nombre = hacienda.nombre
         haciendaValidada.direccion = hacienda.direccion
         haciendaValidada.telefono = hacienda.telefono
+
         const errores: ValidationError[] = await validate(haciendaValidada)
 
         const hayErrores = errores.length > 0;
