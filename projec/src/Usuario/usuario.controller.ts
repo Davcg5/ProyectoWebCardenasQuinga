@@ -13,6 +13,7 @@ export class UsuarioController {
     constructor(
         private readonly __usuarioService: UsuarioService,
         private readonly _rolesService: RolService
+        private readonly  _
     ) {
 
     }

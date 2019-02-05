@@ -89,4 +89,5 @@ export interface Usuario {
     direccionUsuario: string;
     telefonoUsuario?: string;
     contraseñaUsuario: string;
+    hacienda:any
 }
