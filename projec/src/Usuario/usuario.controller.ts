@@ -3,13 +3,16 @@ import {Usuario, UsuarioService} from "./usuario.service";
 import {UsuarioEntity} from "./usuario.entity";
 import {Like} from "typeorm";
 import {Region} from "../Region/region.service";
+import {RolService} from "../rol/rol.service";
+import {RolEntity} from "../rol/rol.entity";
 
 @Controller('Usuario')
 
 export class UsuarioController {
 
     constructor(
-        private readonly __usuarioService: UsuarioService
+        private readonly __usuarioService: UsuarioService,
+        private readonly _rolesService: RolService
     ) {
 
     }
@@ -86,11 +89,17 @@ export class UsuarioController {
 
 //se inicializa la pantalla de crear usuario
     @Get('crear-usuario')
-    crearRegion(
+    async crearRegion(
         @Res() response
     ) {
+        let roles: RolEntity[];
+        roles = await this._rolesService.buscar();
+
         response.render(
-            'UsuarioPantalla/crear-usuario'
+            'UsuarioPantalla/crear-usuario', {
+                arregloRoles: roles,
+
+            }
         )
     }
 

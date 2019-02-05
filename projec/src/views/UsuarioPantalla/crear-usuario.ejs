@@ -105,8 +105,14 @@
 
                         <label for="rol">Roles:</label>
                         <select class="form-control-sm" id="rol">
-                            <option>Administrador</option>
-                            <option>Encargado</option>
+                            <% arregloRoles.forEach((rol)=>{%>
+
+                                <option>
+                                    <%=rol.nombreRol%>
+
+                                </option>
+                          <%  })%>
+
                         </select>
                     </div>
                 </div>
