@@ -204,5 +204,12 @@ export class UsuarioController {
 
     }
 
+    @Get()
+    todos(){
+        this.__usuarioService.todos().then(res=>{
+            console.log(res)
+        })
+    }
+
 
 }

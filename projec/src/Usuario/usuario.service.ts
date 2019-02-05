@@ -52,6 +52,12 @@ export class UsuarioService {
     }
 
 
+     todos(){
+        const usuarioEncontrado =  this._usuarioRepository.find()
+        return usuarioEncontrado
+    }
+
+
     async login(cedula: string, contraseña: string)
         : Promise<boolean> {
         // 1) Buscar al usuario por username
