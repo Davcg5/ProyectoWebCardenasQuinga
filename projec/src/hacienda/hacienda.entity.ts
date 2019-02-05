@@ -42,12 +42,14 @@ export class HaciendaEntity {
     verificarFuncion() {
         console.log('Ejecuta despues de antes de insertar');
     }
+
     @ManyToOne(
         type => RegionEntity, // Tipo relacion de muchos
         // a uno
         region => region.haciendas, // Campo donde nos guarda
     )
     region: RegionEntity[];
+
     @OneToMany(
         type => UsuarioEntity, // Tipo de Dato Un Usuario a muchos
 

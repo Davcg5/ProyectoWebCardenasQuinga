@@ -107,13 +107,17 @@ export class HaciendaController {
         @Param('idHacienda') idHacienda: string,
         @Res() response
     ) {
+        let regiones:RegionEntity[]
+        regiones=await this._regionService.buscar()
         const haciendaAActualizar = await this
             ._haciendaService
             .buscarPorId(Number(idHacienda));
 
         response.render(
             'crear-hacienda', {
-                hacienda: haciendaAActualizar
+                hacienda: haciendaAActualizar,
+                arregloRegiones:regiones
+
             }
         )
     }
@@ -141,12 +145,15 @@ export class HaciendaController {
         @Body() hacienda: Hacienda,
         @Res() response
     ) {
+        console.log(hacienda)
         const haciendaValidada = new HaciendaCreateDto()
 
         haciendaValidada.nombre = hacienda.nombre
         haciendaValidada.direccion = hacienda.direccion
         haciendaValidada.telefono = hacienda.telefono
+        haciendaValidada.region =+hacienda.region
 
+        console.log(haciendaValidada)
         const errores: ValidationError[] = await validate(haciendaValidada)
 
         const hayErrores = errores.length > 0;
@@ -156,7 +163,14 @@ export class HaciendaController {
             response.redirect('/Hacienda/crear-hacienda?error=Hay errores')
         }
         else {
-            await this._haciendaService.crear(hacienda);
+const haciendaFinal = {
+    id:hacienda.id,
+    nombre:hacienda.nombre,
+    direccion:hacienda.direccion,
+    telefono:hacienda.telefono,
+    region:+hacienda.region
+}
+            await this._haciendaService.crear(haciendaFinal);
 
             const parametrosConsulta = `?accion=crear&nombre=${hacienda.nombre}`;
 

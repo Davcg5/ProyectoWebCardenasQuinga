@@ -81,10 +81,10 @@
                 <label for="region" >Region</label>
             </div>
             <div class="col-sm-6">
-                <select class="custom-select" id = region nombre="region">
+                <select class="custom-select" id = region name="region">
                     <option selected>Region...</option>
                     <%arregloRegiones.forEach((regiones)=>{%>
-                    <option value="<%=regiones.id%>">
+                    <option value=<%= regiones.id%>>
                         <%= regiones.nombre%>
                     </option>
 

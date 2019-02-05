@@ -1,14 +1,15 @@
-import {BeforeInsert, ManyToOne, Column, Entity, Index, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {BeforeInsert, ManyToOne, Column, Entity, Index, OneToMany, PrimaryGeneratedColumn, ManyToMany} from "typeorm";
 import {RegionEntity} from "../Region/region.entity";
 import {HaciendaEntity} from "../hacienda/hacienda.entity";
 import {ParcelaEntity} from "../Parcela/parcela.entity";
+import {RolEntity} from "../rol/rol.entity";
 
 @Entity('usuario')
 
 export class UsuarioEntity {
 
     @PrimaryGeneratedColumn()
-    idUsuario: number;
+    id: number;
 
     @Index()
     @Column(
@@ -19,22 +20,27 @@ export class UsuarioEntity {
             default: 'usuario'
         }
     )
-    nombreUsuario: string;
+    nombre: string;
 
     @Column({
         nullable: false,
     })
-    cedulaUsuario: string;
+    cedula: string;
 
     @Column({
         nullable: false
     })
-    direccionUsuario: string;
+    direccion: string;
 
     @Column({
         nullable: false
     })
-    telefonoUsuario: string;
+    telefono: string;
+
+    @Column({
+        nullable: false
+    })
+    password: string;
 
     @BeforeInsert()
     antesDeInsertar() {
@@ -45,7 +51,9 @@ export class UsuarioEntity {
     verificarFuncion() {
         console.log('Ejecuta despues de antes de insertar');
     }
-
+    @ManyToMany(
+        type => RolEntity
+    )
     @ManyToOne(
         type => HaciendaEntity, // Tipo de Dato Un Usuario a muchos
 
@@ -59,4 +67,5 @@ export class UsuarioEntity {
         parcela => parcela.usuario // Cual es el campo FK
     )
     parcelas: ParcelaEntity[]
+
 }

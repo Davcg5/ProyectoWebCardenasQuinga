@@ -68,7 +68,5 @@ export interface Hacienda {
     nombre: string;
     direccion: string;
     telefono:string;
-    
-
-
+    region:any
 }
