@@ -53,7 +53,8 @@ export class RegionController {
                     },
                     {
                         descripcion: Like(`%${busqueda}%`)
-                    }
+                    },
+
                 ]
             };
             regiones = await this._regionService.buscar(consulta);

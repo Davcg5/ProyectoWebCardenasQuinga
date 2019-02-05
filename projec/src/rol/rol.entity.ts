@@ -17,7 +17,7 @@ export class RolEntity {
         {
             name: 'nombreRol',
             type: 'varchar',
-            length: 10,
+            length: 50,
             default: 'sensor'
         }
     )
