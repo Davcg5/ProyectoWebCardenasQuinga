@@ -8,7 +8,7 @@ import {ParcelaEntity} from "../Parcela/parcela.entity";
 export class HaciendaEntity {
 
     @PrimaryGeneratedColumn()
-    idHacienda: number;
+    id: number;
 
     @Index()
     @Column(
@@ -24,17 +24,14 @@ export class HaciendaEntity {
     @Column({
         nullable: false,
     })
-    direccionHacienda: string;
+    direccion: string;
 
     @Column({
         nullable: false
     })
-    telefonoHacienda: string;
+    telefono: string;
 
-    @Column({
-        nullable: false
-    })
-    password: string;
+
 
     @BeforeInsert()
     antesDeInsertar() {
@@ -45,12 +42,14 @@ export class HaciendaEntity {
     verificarFuncion() {
         console.log('Ejecuta despues de antes de insertar');
     }
+
     @ManyToOne(
         type => RegionEntity, // Tipo relacion de muchos
         // a uno
         region => region.haciendas, // Campo donde nos guarda
     )
     region: RegionEntity[];
+
     @OneToMany(
         type => UsuarioEntity, // Tipo de Dato Un Usuario a muchos
 

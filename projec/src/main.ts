@@ -10,6 +10,7 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     app.set('view engine', 'ejs');
     app.set('views', __dirname + '/views');
+
     app.use(
         session({
             name: 'server-session-id',
@@ -23,6 +24,7 @@ async function bootstrap() {
         })
     )
     await app.listen(3002);
+
 }
 
 bootstrap();

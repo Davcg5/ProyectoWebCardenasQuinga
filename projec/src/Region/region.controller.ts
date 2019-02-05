@@ -2,6 +2,8 @@ import {Body, Controller, Get, Param, Post, Query, Res} from "@nestjs/common";
 import {Region, RegionService} from "./region.service";
 import {Like} from "typeorm";
 import {RegionEntity} from "./region.entity";
+import {RegionCreateDto} from "./dto/region-create-dto";
+import {validate, ValidationError} from "class-validator";
 
 @Controller('Region')
 export class RegionController {
@@ -131,12 +133,26 @@ export class RegionController {
         @Body() region: Region,
         @Res() response
     ) {
+        const regionValidada = new RegionCreateDto()
 
-        await this._regionService.crear(region);
+        regionValidada.nombre = region.nombre
+        regionValidada.descripcion = region.descripcion
 
-        const parametrosConsulta = `?accion=crear&nombre=${region.nombre}`;
+        const errores: ValidationError[] = await validate(regionValidada)
 
-        response.redirect('/Region/region' + parametrosConsulta)
+        const hayErrores = errores.length > 0;
+
+        if (hayErrores) {
+            console.error(errores)
+            response.redirect('/Region/crear-region?error=Hay errores')
+        }
+        else {
+            await this._regionService.crear(region);
+
+            const parametrosConsulta = `?accion=crear&nombre=${region.nombre}`;
+
+            response.redirect('/Region/region' + parametrosConsulta)
+        }
     }
 }
 

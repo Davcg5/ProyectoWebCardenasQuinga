@@ -3,6 +3,7 @@ import {AppController} from './app.controller';
 import {AppService} from './app.service';
 
 import {TypeOrmModule} from '@nestjs/typeorm';
+import {HaciendaModule} from "./hacienda/hacienda.module";
 
 import {UsuarioEntity} from "./Usuario/usuario.entity";
 import {HaciendaEntity} from "./hacienda/hacienda.entity";
@@ -13,6 +14,7 @@ import {LecturaEntity} from "./Lectura/lectura.entity";
 import {SubparcelaEntity} from "./Subparcela/subparcela.entity";
 import {RolEntity} from "./rol/rol.entity";
 import {RegionModule} from "./Region/region.module";
+
 import {UsuarioModule} from "./Usuario/usuario.module";
 import {RolModules} from "./rol/rol.modules";
 
@@ -48,6 +50,7 @@ import {RolModules} from "./rol/rol.modules";
 
             RegionModule,
             UsuarioModule,
+          HaciendaModule,
             RolModules
         ], // Modulos
         controllers: [AppController], // Controllers
@@ -56,5 +59,6 @@ import {RolModules} from "./rol/rol.modules";
         ], // Servicios
     }
 )
+
 export class AppModule {
 }

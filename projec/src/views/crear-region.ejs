@@ -42,12 +42,12 @@
         <div class="row">
             <div class="col-sm-3">
 
-                    <label for="region" >Region</label>
+                    <label for="nombre" >Region</label>
             </div>
                     <div class="col-sm-6">
-                    <input id="region"
+                    <input id="nombre"
                            value="<%= creando ? '' : region.nombre %>"
-                           name="region" type="text">
+                           name="nombre" type="text">
                     </div>
 
         </div>
@@ -75,21 +75,24 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-6">
 
                 <button  class="btn btn-outline-success btn-espaciado btn-block" onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Region</button>
             </div>
-            <div class="col-sm-3">
 
-                <button class="btn btn-outline-danger btn-block btn-espaciado" href="/region"> Regresar</button>
-            </div>
         </div>
 
     </form>
+    <div class="row">
+    <div class="col-sm-6">
 
 
+        <a  href="/Region/region">
+            <button class="btn btn-outline-danger btn-block btn-espaciado">Regresar</button>
+        </a>
+    </div>
 
-
+    </div>
 
 
 

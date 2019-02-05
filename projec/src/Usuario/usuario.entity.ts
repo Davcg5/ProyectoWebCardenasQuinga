@@ -1,3 +1,4 @@
+
 import {BeforeInsert, ManyToOne, Column, Entity, Index, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {RegionEntity} from "../Region/region.entity";
 import {HaciendaEntity} from "../hacienda/hacienda.entity";
@@ -66,3 +67,4 @@ export class UsuarioEntity {
     )
     parcelas: ParcelaEntity[]
 }
+
