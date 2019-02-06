@@ -2,12 +2,13 @@ import {Body, Controller, Get, Param, Post, Query, Res, Session} from "@nestjs/c
 import {Usuario, UsuarioService} from "./usuario.service";
 import {UsuarioEntity} from "./usuario.entity";
 import {Like} from "typeorm";
- import {RolEntity} from "../rol/rol.entity";
+import {RolEntity} from "../rol/rol.entity";
 import {HaciendaService} from "../hacienda/hacienda.service";
 import {HaciendaEntity} from "../hacienda/hacienda.entity";
 import {UsuarioCreateDto} from "./dto/usuario-create.dto";
 import {validate, ValidationError} from "class-validator";
 import {UsuarioUpdateDto} from "./dto/usuario-update.dto";
+import {RolService} from "../rol/rol.service";
 
 @Controller('Usuario')
 
@@ -15,7 +16,8 @@ export class UsuarioController {
 
     constructor(
         private readonly __usuarioService: UsuarioService,
-         private readonly _haciendaService: HaciendaService
+        private readonly _haciendaService: HaciendaService,
+        private readonly _rolservice: RolService
     ) {
 
     }
@@ -56,6 +58,7 @@ export class UsuarioController {
         }
 
         let usuarios: UsuarioEntity[];
+
         if (busqueda) {
             const consulta = {
                 where: [
@@ -105,14 +108,19 @@ export class UsuarioController {
     ) {
 
 
-
         let hacienda: HaciendaEntity[];
         hacienda = await
             this._haciendaService.buscar();
 
+        let rol: RolEntity[];
+        rol = await
+            this._rolservice.buscar();
+
         response.render(
             'UsuarioPantalla/crear-usuario', {
-                 arregloHacienda: hacienda
+                arregloRol: rol,
+                arregloHacienda: hacienda
+
             });
     }
 
@@ -193,8 +201,6 @@ export class UsuarioController {
                 .buscarPorId(Number(idUsuario));
 
 
-
-
         let hacienda: HaciendaEntity[];
         hacienda = await
             this._haciendaService.buscar();
@@ -202,7 +208,7 @@ export class UsuarioController {
         response.render(
             'UsuarioPantalla/crear-usuario', {//ir a la pantalla de crear-usuario
                 usuario: usuarioAActualizar,
-                 arregloHacienda: hacienda
+                arregloHacienda: hacienda
             }
         )
     }

@@ -103,9 +103,6 @@
 
                     </div>
 
-
-
-
                     <div class="col">
 
                         <label for="hacienda">Seleccionar Hacienda:</label>
@@ -119,7 +116,31 @@
                             <% }) %>
 
                         </select> *
+
+
+
+
                     </div>
+
+                    <div class="col">
+
+                        <label for="rol">Seleccionar Rol:</label>
+                        <select class="form-control-sm" id=rol name="rol">
+                            <% arregloRol.forEach((rol)=>{ %>
+
+                                <option value=<%= rol.idRol %>>
+                                    <%= rol.nombreRol %>
+
+                                </option>
+                            <% }) %>
+
+                        </select> *
+
+
+
+
+                    </div>
+
                 </div>
                 <br>
 

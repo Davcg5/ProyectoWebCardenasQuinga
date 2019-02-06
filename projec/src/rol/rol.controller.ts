@@ -12,8 +12,7 @@ export class RolController {
 
     constructor(
         private readonly __rolService: RolService,
-        private readonly __usuarioService: UsuarioService
-    ) {
+     ) {
 
     }
 

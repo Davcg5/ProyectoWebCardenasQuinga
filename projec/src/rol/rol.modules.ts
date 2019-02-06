@@ -9,7 +9,7 @@ import {UsuarioModule} from "../Usuario/usuario.module";
     imports: [
         TypeOrmModule.forFeature([
             RolEntity
-        ]),UsuarioModule
+        ])
     ],
     controllers: [
         RolController
