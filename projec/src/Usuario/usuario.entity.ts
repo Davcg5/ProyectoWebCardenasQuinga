@@ -9,7 +9,7 @@ import {ParcelaEntity} from "../Parcela/parcela.entity";
 export class UsuarioEntity {
 
     @PrimaryGeneratedColumn()
-    idUsuario: number;
+    id: number;
 
     @Index()
     @Column(

@@ -15,10 +15,12 @@ import {RolService} from "../rol/rol.service";
 export class UsuarioController {
 
     constructor(
+
         private readonly __usuarioService: UsuarioService,
         private readonly _haciendaService: HaciendaService,
         private readonly _rolservice: RolService
     ) {
+
 
     }
 
@@ -78,14 +80,12 @@ export class UsuarioController {
                 ]
             };
 
+
             usuarios = await
                 this.__usuarioService.buscar(consulta);
-
-
-        }
-        else {
             usuarios = await
                 this.__usuarioService.buscar();
+
         }
         response.render('UsuarioPantalla/usuario', {
             nombreUsuario: 'Vinicio',
@@ -131,8 +131,7 @@ export class UsuarioController {
             usuario: Usuario,
         @Res()
             response
-    ) {
-
+ 
         const usuariovalidado = new UsuarioCreateDto();
         usuariovalidado.nombreUsuario = usuario.nombreUsuario;
         usuariovalidado.cedulaUsuario = usuario.cedulaUsuario;
@@ -159,6 +158,7 @@ export class UsuarioController {
 
             response.redirect('/Usuario/usuario' + parametrosConsulta)
 
+
         }
 
     }
@@ -172,13 +172,14 @@ export class UsuarioController {
             idUsuario: string,
         @Res()
             response
-    ) {
+ 
         const usuarioEncontrada = await
             this.__usuarioService
                 .buscarPorId(+idUsuario);
 
         await
             this.__usuarioService.borrar(Number(idUsuario));
+
 
         const parametrosConsulta = `?accion=borrar&nombre=${usuarioEncontrada.nombreUsuario}`;
 
@@ -195,6 +196,7 @@ export class UsuarioController {
         @Res()
             response
     ) {
+
         const usuarioAActualizar = await
             this
                 .__usuarioService
@@ -204,6 +206,7 @@ export class UsuarioController {
         let hacienda: HaciendaEntity[];
         hacienda = await
             this._haciendaService.buscar();
+
 
         response.render(
             'UsuarioPantalla/crear-usuario', {//ir a la pantalla de crear-usuario
@@ -231,6 +234,7 @@ export class UsuarioController {
         usuariovalidadoU.telefonoUsuario = usuario.telefonoUsuario;
         usuariovalidadoU.contraseñaUsuario = usuario.contraseñaUsuario;
         usuariovalidadoU.hacienda = usuario.hacienda;
+
 
 
         const errores: ValidationError[] = await validate(usuariovalidadoU);

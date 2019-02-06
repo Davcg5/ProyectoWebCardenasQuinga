@@ -17,6 +17,9 @@ import {RegionModule} from "./Region/region.module";
 
 import {UsuarioModule} from "./Usuario/usuario.module";
 import {RolModules} from "./rol/rol.modules";
+import {ParcelaModule} from "./Parcela/parcela.module";
+import {SubparcelaModule} from "./Subparcela/subparcela.module";
+import {SensorModule} from "./Sensor/sensor.module";
 
 @Module({
         imports: [
@@ -26,12 +29,8 @@ import {RolModules} from "./rol/rol.modules";
                     host: 'localhost',
                     port: 3306,
 
-                    /*  username: 'root',
-                      password: 'password',*/
-
-                    username: 'vinicioQ',
-                    password: '98765432',
-
+                    username: 'root',
+                    password: 'password',
                     database: 'webproject',
                     synchronize: true,
                     dropSchema: false,
@@ -51,6 +50,10 @@ import {RolModules} from "./rol/rol.modules";
             RegionModule,
             UsuarioModule,
           HaciendaModule,
+            ParcelaModule,
+SubparcelaModule,
+            SensorModule,
+
             RolModules
         ], // Modulos
         controllers: [AppController], // Controllers
