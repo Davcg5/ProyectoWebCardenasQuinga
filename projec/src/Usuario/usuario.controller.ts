@@ -248,7 +248,6 @@ export class UsuarioController {
 
         }
 
-
     }
 
     @Get()

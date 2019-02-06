@@ -18,39 +18,6 @@ export class RolController {
     }
 
 
-    @Get('rol')
-    rolBuscar(
-        @Res() response,
-        @Session() sesion
-    ) {
-        console.log(sesion);
-        response.render('RolesCrear/roles', {});
-    }
-
-
-    @Get('crear-rol')
-    async crearCrear(
-        @Res() response,
-        @Session() sesion
-    ) {
-        let roles: RolEntity[];
-        roles = await
-            this.__rolService.buscar();
-
-
-        let usuario: UsuarioEntity[];
-        usuario = await
-            this.__usuarioService.buscar();
-
-
-        response.render('RolesCrear/crear-roles', {
-            arregloRoles: roles,
-            arredloUsuarios: usuario
-
-        });
-    }
-
-
     @Get('menuAdministrador')
     admistracionMenuVis(
         @Res() response,
