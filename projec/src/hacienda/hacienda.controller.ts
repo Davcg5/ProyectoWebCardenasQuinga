@@ -94,6 +94,7 @@ export class HaciendaController {
     ) {
         let regiones:RegionEntity[]
         regiones=await this._regionService.buscar()
+
         response.render(
             'crear-hacienda',
             {

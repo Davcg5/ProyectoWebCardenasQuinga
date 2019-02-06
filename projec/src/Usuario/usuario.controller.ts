@@ -11,7 +11,7 @@ import {RolEntity} from "../rol/rol.entity";
 export class UsuarioController {
 
     constructor(
-        private readonly __usuarioService: UsuarioService,
+        private readonly _usuarioService: UsuarioService,
         private readonly _rolesService: RolService
      ) {
 
@@ -67,12 +67,12 @@ export class UsuarioController {
                 ]
             };
 
-            usuarios = await this.__usuarioService.buscar(consulta);
+            usuarios = await this._usuarioService.buscar(consulta);
 
 
         }
         else {
-            usuarios = await this.__usuarioService.buscar();
+            usuarios = await this._usuarioService.buscar();
         }
         response.render('UsuarioPantalla/usuario', {
             nombreUsuario: 'Vinicio',
@@ -110,7 +110,7 @@ export class UsuarioController {
         @Res() response
     ) {
 
-        await this.__usuarioService.crear(usuario);
+        await this._usuarioService.crear(usuario);
 
         const parametrosConsulta = `?accion=crear&nombre=${usuario.nombreUsuario}`;
 
@@ -125,10 +125,10 @@ export class UsuarioController {
         @Param('idUsuario') idUsuario: string,
         @Res() response
     ) {
-        const usuarioEncontrada = await this.__usuarioService
+        const usuarioEncontrada = await this._usuarioService
             .buscarPorId(+idUsuario);
 
-        await this.__usuarioService.borrar(Number(idUsuario));
+        await this._usuarioService.borrar(Number(idUsuario));
 
         const parametrosConsulta = `?accion=borrar&nombre=${usuarioEncontrada.nombreUsuario}`;
 
@@ -144,7 +144,7 @@ export class UsuarioController {
         @Res() response
     ) {
         const usuarioAActualizar = await this
-            .__usuarioService
+            ._usuarioService
             .buscarPorId(Number(idUsuario));
 
         response.render(
@@ -163,7 +163,7 @@ export class UsuarioController {
     ) {
         usuario.idUsuario = +idUsuario;
 
-        await this.__usuarioService.actualizar(+idUsuario, usuario);
+        await this._usuarioService.actualizar(+idUsuario, usuario);
 
         const parametrosConsulta = `?accion=actualizar&nombre=${usuario.nombreUsuario}`;
 

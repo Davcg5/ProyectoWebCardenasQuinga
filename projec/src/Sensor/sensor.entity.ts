@@ -10,7 +10,7 @@ import {LecturaEntity} from "../Lectura/lectura.entity";
 export class SensorEntity {
 
     @PrimaryGeneratedColumn()
-    idSensor: number;
+    id: number;
 
     @Index()
     @Column(

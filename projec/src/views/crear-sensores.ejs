@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        .rojo {
+            background-color: red;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Hcienda</title>
+</head>
+<body>
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sensor</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="/bootstrap-4.0.0-dist/css/animate.css">
+
+    <link rel="stylesheet"
+          href="/projec/bootstrap-4.0.0-dist/css/mis-estilos.css">
+</head>
+<body>
+<div class="container">
+    <% var creando = typeof sensor === "undefined" ? true : false; %>
+
+    <h1> <%= creando ? 'Crear' : 'Actualizar' %> Sensor</h1>
+    <p><%= creando ? 'Creando' : 'Actualizando' %> un sensor.</p>
+
+    <form action="/Sensor/<%= creando ? 'crear' : 'actualizar' %>-sensores/<%= creando ? '' : sensor.id%>"
+          method="POST">
+        <div class="row">
+            <div class="col-sm-3">
+
+                <label for="codigoSensor" >Sensor</label>
+            </div>
+            <div class="col-sm-6">
+                <input id="codigoSensor"
+                       value="<%= creando ? '' : sensor.codigoSensor%>"
+                       name="codigoSensor" type="text">
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-3">
+
+                <label for="subparcela" >Subparcela</label>
+            </div>
+            <div class="col-sm-6">
+                <select class="custom-select" id = subparcela name="subparcela">
+                    <option selected>Subparcela...</option>
+                    <%arregloSubparcelas.forEach((subparcela)=>{%>
+                    <option value=<%= subparcela.id%>>
+                        <%= subparcela.codigo%>
+                    </option>
+
+                    <%})%>
+                </select>
+            </div>
+
+        </div>
+
+
+            <div class="col-sm-3">
+
+                <button class="btn btn-outline-info btn-block btn-espaciado" type="reset">Resetear formulario</button>
+
+
+            </div>
+
+
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                <button  class="btn btn-outline-success btn-espaciado btn-block" onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Sensor</button>
+            </div>
+
+        </div>
+
+    </form>
+    <div class="row">
+        <div class="col-sm-6">
+
+
+            <a  href="/Sensor/sensor">
+                <button class="btn btn-outline-danger btn-block btn-espaciado">Regresar</button>
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        function validarNombre(evento) {
+            // 0) Obtener el valor del campo
+            // 1) Revisar el campo no este vacio
+            // 2) Revisar el campo tenga 3 char
+            const inputNombre = document
+                .getElementById("nombre");
+            const nombre = inputNombre.value;
+            if (nombre.length < 3) {
+                event.preventDefault()
+                alert('Tu nombre es muy corto')
+            }else{
+
+            }
+
+        }
+    </script>
+
+
+</div>
+
+
+
+</body>
+</html>
+
+

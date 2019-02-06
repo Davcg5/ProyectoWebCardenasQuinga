@@ -9,7 +9,7 @@ import {SubparcelaEntity} from "../Subparcela/subparcela.entity";
 export class ParcelaEntity {
 
     @PrimaryGeneratedColumn()
-    idParcela: number;
+    id: number;
 
     @Index()
     @Column(
@@ -20,12 +20,12 @@ export class ParcelaEntity {
             default: 'parcela'
         }
     )
-    codigoParcela: string;
+    codigo: string;
 
     @Column({
         nullable: false,
     })
-    medidasParcela: string;
+    medidas: string;
 
 
     @BeforeInsert()
@@ -44,6 +44,7 @@ export class ParcelaEntity {
         hacienda => hacienda.parcelas // Cual es el campo FK
     )
     hacienda: HaciendaEntity;
+
     @ManyToOne(
         type => UsuarioEntity, // Tipo de Dato Un Usuario a muchos
 

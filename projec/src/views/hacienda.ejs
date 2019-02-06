@@ -15,8 +15,10 @@
           href="/projec/bootstrap-4.0.0-dist/css/mis-estilos.css">
 </head>
 <body>
-<div class="container">
 
+<center>
+<div class="container">
+    <div class="solid">
     <% const existeMensaje = typeof mensaje !== "undefined" ? true : false; %>
 
 
@@ -32,6 +34,16 @@
 
     <% var apellido = 'Cardenas' %>
     <!-- h1 -> Header 1 -->
+        <nav>
+            <ul class="nav justify-content-end">
+
+                <li class="nav-item">
+                    <a  href="/Rol/menuAdministrador" style="color: black">Ménu Principal</a>
+                </li>
+
+            </ul>
+
+        </nav>
     <h1> Lista de haciendas</h1>
     <p>Crea, edita, actualiza y busca haciendas. Puedes buscar
         haciendas por nombre o descripcion.
@@ -141,7 +153,9 @@
     </table>
 
 
+    </div>
 
 </div>
+</center>
 </body>
 </html>

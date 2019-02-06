@@ -9,7 +9,7 @@ import {SensorEntity} from "../Sensor/sensor.entity";
 export class SubparcelaEntity {
 
     @PrimaryGeneratedColumn()
-    idSubparcela: number;
+    id: number;
 
     @Index()
     @Column(
@@ -20,12 +20,12 @@ export class SubparcelaEntity {
             default: 'subparcela'
         }
     )
-    codigoSubparcela: string;
+    codigo: string;
 
     @Column({
         nullable: false,
     })
-    medidasSubparcela: string;
+    medidas: string;
 
 
     @BeforeInsert()
@@ -43,7 +43,8 @@ export class SubparcelaEntity {
 
         parcela => parcela.subparcelas // Cual es el campo FK
     )
-    parcelas: ParcelaEntity;
+    parcela: ParcelaEntity;
+
 @OneToMany(
     type => SensorEntity,
     sensor => sensor.subparcela
