@@ -2,11 +2,12 @@ import {Body, Controller, Get, Param, Post, Query, Res, Session} from "@nestjs/c
 import {Usuario, UsuarioService} from "./usuario.service";
 import {UsuarioEntity} from "./usuario.entity";
 import {Like} from "typeorm";
-import {Region} from "../Region/region.service";
-import {RolService} from "../rol/rol.service";
-import {RolEntity} from "../rol/rol.entity";
+ import {RolEntity} from "../rol/rol.entity";
 import {HaciendaService} from "../hacienda/hacienda.service";
 import {HaciendaEntity} from "../hacienda/hacienda.entity";
+import {UsuarioCreateDto} from "./dto/usuario-create.dto";
+import {validate, ValidationError} from "class-validator";
+import {UsuarioUpdateDto} from "./dto/usuario-update.dto";
 
 @Controller('Usuario')
 
@@ -14,8 +15,7 @@ export class UsuarioController {
 
     constructor(
         private readonly __usuarioService: UsuarioService,
-        private readonly _rolesService: RolService,
-        private readonly _haciendaService: HaciendaService
+         private readonly _haciendaService: HaciendaService
     ) {
 
     }
@@ -76,13 +76,13 @@ export class UsuarioController {
             };
 
             usuarios = await
-            this.__usuarioService.buscar(consulta);
+                this.__usuarioService.buscar(consulta);
 
 
         }
         else {
             usuarios = await
-            this.__usuarioService.buscar();
+                this.__usuarioService.buscar();
         }
         response.render('UsuarioPantalla/usuario', {
             nombreUsuario: 'Vinicio',
@@ -103,23 +103,17 @@ export class UsuarioController {
         @Res()
             response
     ) {
-        let roles: RolEntity[];
-        roles = await
-        this._rolesService.buscar();
+
 
 
         let hacienda: HaciendaEntity[];
-
         hacienda = await
-        this._haciendaService.buscar();
+            this._haciendaService.buscar();
 
         response.render(
             'UsuarioPantalla/crear-usuario', {
-                arregloRoles: roles,
-                arregloHacienda: hacienda
-
-            }
-        )
+                 arregloHacienda: hacienda
+            });
     }
 
 //CREAR USUARIO Y GUARDAR EN LA BASE DE DATOS
@@ -131,12 +125,34 @@ export class UsuarioController {
             response
     ) {
 
-        await
-        this.__usuarioService.crear(usuario);
+        const usuariovalidado = new UsuarioCreateDto();
+        usuariovalidado.nombreUsuario = usuario.nombreUsuario;
+        usuariovalidado.cedulaUsuario = usuario.cedulaUsuario;
+        usuariovalidado.direccionUsuario = usuario.direccionUsuario;
+        usuariovalidado.telefonoUsuario = usuario.telefonoUsuario;
+        usuariovalidado.contraseñaUsuario = usuario.contraseñaUsuario;
+        usuariovalidado.hacienda = usuario.hacienda;
 
-        const parametrosConsulta = `?accion=crear&nombre=${usuario.nombreUsuario}`;
 
-        response.redirect('/Usuario/usuario' + parametrosConsulta)
+        const errores: ValidationError[] = await validate(usuariovalidado);
+        const hayerrores = errores.length > 0;
+
+
+        if (hayerrores) {
+            response.redirect('/Usuario/crear-usuario?error= hay error');
+
+
+        } else {
+
+            await
+                this.__usuarioService.crear(usuario);
+
+            const parametrosConsulta = `?accion=crear&nombre=${usuario.nombreUsuario}`;
+
+            response.redirect('/Usuario/usuario' + parametrosConsulta)
+
+        }
+
     }
 
 
@@ -150,11 +166,11 @@ export class UsuarioController {
             response
     ) {
         const usuarioEncontrada = await
-        this.__usuarioService
-            .buscarPorId(+idUsuario);
+            this.__usuarioService
+                .buscarPorId(+idUsuario);
 
         await
-        this.__usuarioService.borrar(Number(idUsuario));
+            this.__usuarioService.borrar(Number(idUsuario));
 
         const parametrosConsulta = `?accion=borrar&nombre=${usuarioEncontrada.nombreUsuario}`;
 
@@ -172,13 +188,21 @@ export class UsuarioController {
             response
     ) {
         const usuarioAActualizar = await
-        this
-            .__usuarioService
-            .buscarPorId(Number(idUsuario));
+            this
+                .__usuarioService
+                .buscarPorId(Number(idUsuario));
+
+
+
+
+        let hacienda: HaciendaEntity[];
+        hacienda = await
+            this._haciendaService.buscar();
 
         response.render(
             'UsuarioPantalla/crear-usuario', {//ir a la pantalla de crear-usuario
-                usuario: usuarioAActualizar
+                usuario: usuarioAActualizar,
+                 arregloHacienda: hacienda
             }
         )
     }
@@ -193,20 +217,43 @@ export class UsuarioController {
         @Body()
             usuario: Usuario
     ) {
-        usuario.idUsuario = +idUsuario;
 
-        await
-        this.__usuarioService.actualizar(+idUsuario, usuario);
+        const usuariovalidadoU = new UsuarioUpdateDto();
+        usuariovalidadoU.nombreUsuario = usuario.nombreUsuario;
+        usuariovalidadoU.cedulaUsuario = usuario.cedulaUsuario;
+        usuariovalidadoU.direccionUsuario = usuario.direccionUsuario;
+        usuariovalidadoU.telefonoUsuario = usuario.telefonoUsuario;
+        usuariovalidadoU.contraseñaUsuario = usuario.contraseñaUsuario;
+        usuariovalidadoU.hacienda = usuario.hacienda;
 
-        const parametrosConsulta = `?accion=actualizar&nombre=${usuario.nombreUsuario}`;
 
-        response.redirect('/Usuario/usuario' + parametrosConsulta);
+        const errores: ValidationError[] = await validate(usuariovalidadoU);
+        const hayerroresU = errores.length > 0;
+
+
+        if (hayerroresU) {
+            response.redirect('/Usuario/usuario?error= hay error no se pudo actualizar');
+
+
+        }
+        else {
+            usuario.idUsuario = +idUsuario;
+
+            await
+                this.__usuarioService.actualizar(+idUsuario, usuario);
+
+            const parametrosConsulta = `?accion=actualizar&nombre=${usuario.nombreUsuario}`;
+
+            response.redirect('/Usuario/usuario' + parametrosConsulta);
+
+        }
+
 
     }
 
     @Get()
-    todos(){
-        this.__usuarioService.todos().then(res=>{
+    todos() {
+        this.__usuarioService.todos().then(res => {
             console.log(res)
         })
     }

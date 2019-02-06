@@ -13,7 +13,7 @@ import {HaciendaModule} from "../hacienda/hacienda.module";
 
         TypeOrmModule.forFeature([
             UsuarioEntity
-        ]),RolModules, HaciendaModule
+        ]),HaciendaModule
 
 
     ],

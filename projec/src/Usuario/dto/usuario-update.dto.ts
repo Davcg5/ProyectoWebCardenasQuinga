@@ -1,6 +1,6 @@
-import {IsEmpty, IsNotEmpty, IsNumber, IsString, Length} from "class-validator";
+import {IsNotEmpty, IsNumber, IsString, Length} from "class-validator";
 
-export class UsuarioCreateDto {
+export class UsuarioUpdateDto {
 
 
     @IsNotEmpty()
