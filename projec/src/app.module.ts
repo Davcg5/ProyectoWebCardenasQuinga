@@ -29,8 +29,12 @@ import {SensorModule} from "./Sensor/sensor.module";
                     host: 'localhost',
                     port: 3306,
 
-                    username: 'root',
-                    password: 'password',
+                    /*username: 'root',
+                    password: 'password',*/
+
+                    username: 'vinicioQ',
+                    password: '98765432',
+
                     database: 'webproject',
                     synchronize: true,
                     dropSchema: false,

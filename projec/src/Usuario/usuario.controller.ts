@@ -15,7 +15,6 @@ import {RolService} from "../rol/rol.service";
 export class UsuarioController {
 
     constructor(
-
         private readonly __usuarioService: UsuarioService,
         private readonly _haciendaService: HaciendaService,
         private readonly _rolservice: RolService
@@ -23,7 +22,6 @@ export class UsuarioController {
 
 
     }
-
 
     @Get('usuario')
     async usuario(
@@ -80,12 +78,13 @@ export class UsuarioController {
                 ]
             };
 
-
             usuarios = await
                 this.__usuarioService.buscar(consulta);
+        }
+
+        else {
             usuarios = await
                 this.__usuarioService.buscar();
-
         }
         response.render('UsuarioPantalla/usuario', {
             nombreUsuario: 'Vinicio',
@@ -130,8 +129,8 @@ export class UsuarioController {
         @Body()
             usuario: Usuario,
         @Res()
-            response
- 
+            response,) {
+
         const usuariovalidado = new UsuarioCreateDto();
         usuariovalidado.nombreUsuario = usuario.nombreUsuario;
         usuariovalidado.cedulaUsuario = usuario.cedulaUsuario;
@@ -171,8 +170,8 @@ export class UsuarioController {
         @Param('idUsuario')
             idUsuario: string,
         @Res()
-            response
- 
+            response) {
+
         const usuarioEncontrada = await
             this.__usuarioService
                 .buscarPorId(+idUsuario);
@@ -234,7 +233,6 @@ export class UsuarioController {
         usuariovalidadoU.telefonoUsuario = usuario.telefonoUsuario;
         usuariovalidadoU.contraseñaUsuario = usuario.contraseñaUsuario;
         usuariovalidadoU.hacienda = usuario.hacienda;
-
 
 
         const errores: ValidationError[] = await validate(usuariovalidadoU);
