@@ -31,6 +31,9 @@
             width: border-box;
         }
 
+        .rojo {
+            background-color: red;
+        }
 
     </style>
 
@@ -46,7 +49,6 @@
         <div class="solid">
 
             <br>
-
             <% var creando = typeof usuario === "undefined" ? true : false; %>
 
             <h1> <%= creando ? 'Crear' : 'Actualizar' %> Usuario</h1>
@@ -61,14 +63,14 @@
                         <label for="nombreUsuario">Nombre:</label>
                         <input id="nombreUsuario" type="text"
                                value="<%= creando ? '' : usuario.nombreUsuario %>"
-                               class="form-control-sm" name="nombreUsuario">
+                               class="form-control-sm" name="nombreUsuario">*
 
                     </div>
                     <div class="col">
                         <label for="cedulaUsuario">Cédula:</label>
                         <input id="cedulaUsuario" type="number"
                                value="<%= creando ? '' : usuario.cedulaUsuario %>"
-                               class="form-control-sm" name="cedulaUsuario">
+                               class="form-control-sm" name="cedulaUsuario">*
                     </div>
                 </div>
                 <br>
@@ -79,7 +81,7 @@
                         <label for="direccionUsuario">Direcciòn:</label>
                         <input id="direccionUsuario" type="text"
                                value="<%= creando ? '' : usuario.direccionUsuario %>"
-                               class="form-control-sm" name="direccionUsuario">
+                               class="form-control-sm" name="direccionUsuario">*
 
                     </div>
 
@@ -87,7 +89,7 @@
                         <label for="telefonoUsuario">Telefono:</label>
                         <input id="telefonoUsuario" type="number"
                                value="<%= creando ? '' : usuario.telefonoUsuario %>"
-                               class="form-control-sm" name="telefonoUsuario">
+                               class="form-control-sm" name="telefonoUsuario">*
                     </div>
                 </div>
 
@@ -97,24 +99,48 @@
                         <label for="contraseñaUsuario">Contraseña:</label>
                         <input id="contraseñaUsuario" type="password"
                                value="<%= creando ? '' : usuario.contraseñaUsuario %>"
-                               class="form-control-sm" name="contraseñaUsuario">
+                               class="form-control-sm" name="contraseñaUsuario">*
 
                     </div>
 
                     <div class="col">
 
-                        <label for="rol">Roles:</label>
-                        <select class="form-control-sm" id="rol">
-                            <% arregloRoles.forEach((rol)=>{%>
+                        <label for="hacienda">Seleccionar Hacienda:</label>
+                        <select class="form-control-sm" id=hacienda name="hacienda">
+                            <% arregloHacienda.forEach((hacienda)=>{ %>
 
-                                <option>
-                                    <%=rol.nombreRol%>
+                                <option value=<%= hacienda.id %>>
+                                    <%= hacienda.nombre %>
 
                                 </option>
-                          <%  })%>
+                            <% }) %>
 
-                        </select>
+                        </select> *
+
+
+
+
                     </div>
+
+                    <div class="col">
+
+                        <label for="rol">Seleccionar Rol:</label>
+                        <select class="form-control-sm" id=rol name="rol">
+                            <% arregloRol.forEach((rol)=>{ %>
+
+                                <option value=<%= rol.idRol %>>
+                                    <%= rol.nombreRol %>
+
+                                </option>
+                            <% }) %>
+
+                        </select> *
+
+
+
+
+                    </div>
+
                 </div>
                 <br>
 
@@ -137,6 +163,25 @@
         </div>
     </div>
 </center>
+
+
+<script>
+
+
+    const etiquetaSelectRegiones = document
+        .getElementById('hacienda');
+
+    arregloHacienda
+        .forEach(
+            (hacienda) => {
+                const nuevaOption = document.createElement('option');
+                nuevaOption.value = hacienda.id;
+                nuevaOption.innerText = hacienda.nombre;
+                etiquetaSelectRegiones.appendChild(nuevaOption);
+            }
+        )
+    re
+</script>
 
 
 <script>

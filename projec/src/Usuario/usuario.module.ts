@@ -5,6 +5,7 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 import {UsuarioEntity} from "./usuario.entity";
 import {RolEntity} from "../rol/rol.entity";
 import {RolModules} from "../rol/rol.modules";
+import {HaciendaModule} from "../hacienda/hacienda.module";
 
 
 @Module({
@@ -12,8 +13,7 @@ import {RolModules} from "../rol/rol.modules";
 
         TypeOrmModule.forFeature([
             UsuarioEntity
-        ]),RolModules
-
+        ]),HaciendaModule,RolModules
 
     ],
     controllers: [

@@ -56,7 +56,7 @@ export class UsuarioEntity {
     @ManyToOne(
         type => HaciendaEntity, // Tipo de Dato Un Usuario a muchos
 
-        hacienda => hacienda.usuarios // Cual es el campo FK
+        hacienda => hacienda.usuarios, {eager: true} // Cual es el campo FK
     )
     hacienda: HaciendaEntity
 

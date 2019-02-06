@@ -10,6 +10,9 @@ export class RolService {
     constructor(
         @InjectRepository(RolEntity)
         private readonly _rolRepository: Repository<RolEntity>
+
+
+
     ) {}
 
 

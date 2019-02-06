@@ -366,8 +366,14 @@
             <input type="password" id="contraseña" class="fadeIn third" name="contraseña" placeholder="Contraseña">
 
             <select class="form-control-sm fadeIn fourth">
-                <option value="administrador">Administrador</option>
-                <option value="encargado">Encargado</option>
+
+                <% arregloRoles.forEach((rol)=>{%>
+
+                <option>
+                    <%=rol.nombreRol%>
+
+                </option>
+                <%  })%>
             </select>
             <br>
             <br>

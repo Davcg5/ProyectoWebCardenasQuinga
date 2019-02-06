@@ -10,8 +10,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 
-
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-º3.3.1.slim.min.js"
@@ -56,7 +54,23 @@
 
             </nav>
 
-            <h1>Usuarios</h1>
+            <% const existeMensaje = typeof mensaje !== "undefined" ? true : false; %>
+
+            <% if(existeMensaje){ %>
+                <div class="animated fadeOut alert alert-<%= accion %>" role="alert">
+                    MENSAJE: <%= mensaje %>
+                </div>
+            <% } %>
+
+            <% var apellido = 'Cardenas' %>
+            <!-- h1 -> Header 1 -->
+            <h1> Lista de Usuarios</h1>
+            <p>Crea, edita, actualiza y busca Usuarios. Puedes buscar
+                Usuarios por nombre o Cédula.
+            </p>
+            <!-- p -> parrafo -->
+
+            <!-- a -> anchor-->
 
             <a class="quitar-decoracion" href="/Usuario/crear-usuario">
                 <button class="btn btn-outline-success btn-espaciado ">
@@ -100,6 +114,7 @@
                     <th scope="col">Contraseña</th>
                     <th scope="col">Dirección</th>
                     <th scope="col"> Teléfono</th>
+                    <th scope="col"> Hacienda</th>
                     <th scope="col"> Accion</th>
                 </tr>
                 </thead>
@@ -125,6 +140,9 @@
 
                         <td align="center">
                             <%= usuario.telefonoUsuario %>
+                        </td>
+
+                        <td align="center">
                         </td>
 
                         <td align="center">
@@ -160,6 +178,7 @@
         </div>
     </div>
 </center>
+
 
 <script>
     function borrar(evento) {

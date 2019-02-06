@@ -2,11 +2,14 @@ import {BadRequestException, Body, Controller, Get, HttpCode, Post, Res, Session
 import {AppService} from './app.service';
 import {UsuarioService} from "./Usuario/usuario.service";
 import {ok} from "assert";
+import {RolService} from "./rol/rol.service";
+import {RolEntity} from "./rol/rol.entity";
 
 @Controller('Login')
 export class AppController {
     constructor(
         private readonly _usuarioService: UsuarioService,
+        private readonly _rolesService: RolService
     ) {
 
     }
@@ -34,10 +37,16 @@ export class AppController {
     }
 
     @Get('login')
-    loginVista(
+    async loginVista(
         @Res() response
     ) {
-        response.render('inicioLogin/login');
+
+        let roles: RolEntity[];
+        roles = await this._rolesService.buscar();
+        response.render('inicioLogin/login', {
+                arregloRoles: roles
+            }
+        );
     }
 
 
