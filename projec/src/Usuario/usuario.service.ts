@@ -42,8 +42,7 @@ export class UsuarioService {
 
     borrar(idUsuario: number): Promise<UsuarioEntity> {
         const usuarioEntityAEliminar = this._usuarioRepository.create({
-            idUsuario: idUsuario
-        });
+            idUsuario: idUsuario});
         return this._usuarioRepository.remove(usuarioEntityAEliminar)
     }
 

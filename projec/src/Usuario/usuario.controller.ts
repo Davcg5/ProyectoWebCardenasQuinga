@@ -125,19 +125,19 @@ export class UsuarioController {
 
 //CREAR USUARIO Y GUARDAR EN LA BASE DE DATOS
     @Post('crear-usuario')
-    async crearRegionFormulario(
+     async crearRegionFormulario(
         @Body()
             usuario: Usuario,
         @Res()
             response,) {
 
-        const usuariovalidado = new UsuarioCreateDto();
+        const usuariovalidado = new UsuarioCreateDto();/*
         usuariovalidado.nombreUsuario = usuario.nombreUsuario;
         usuariovalidado.cedulaUsuario = usuario.cedulaUsuario;
         usuariovalidado.direccionUsuario = usuario.direccionUsuario;
         usuariovalidado.telefonoUsuario = usuario.telefonoUsuario;
         usuariovalidado.contraseñaUsuario = usuario.contraseñaUsuario;
-        usuariovalidado.hacienda = usuario.hacienda;
+        usuariovalidado.hacienda = usuario.hacienda;*/
 
 
         const errores: ValidationError[] = await validate(usuariovalidado);
@@ -149,13 +149,29 @@ export class UsuarioController {
 
 
         } else {
+            console.log(usuario)
 
-            await
-                this.__usuarioService.crear(usuario);
+                this.__usuarioService.crear(usuario).then(res=>{
+                    console.log(res.idUsuario)
+                    console.log(res.hacienda)
+
+
+
+
+
+
+
+
+
+
+
+
+                });
 
             const parametrosConsulta = `?accion=crear&nombre=${usuario.nombreUsuario}`;
 
             response.redirect('/Usuario/usuario' + parametrosConsulta)
+
 
 
         }
