@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Notificaciones</title>
+    <title>Monitoreo</title>
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -60,16 +60,75 @@
             </nav>
 
             <br>
-            <h1>NOTIFICACIONES</h1>
+            <h1>MONITOREO</h1>
 
-
+            <BR>
             <form action=""
                   method="POST">
 
                 <div class="row">
 
 
+                    <div class="col">
+
+                        <label for="parcela">Seleccionar Parcela:</label>
+                        <select class="form-control-sm" id=parcela name="parcela">
+                            <% arregloparcela.forEach((parcela)=>{ %>
+
+                                <option value=<%= parcela.id %>>
+                                    <%= parcela.codigo %>
+
+                                </option>
+                            <% }) %>
+
+                        </select>
+
+
+                    </div>
+
+
+                    <div class="col">
+
+                        <label for="subparcela">Seleccionar Subparcela:</label>
+                        <select class="form-control-sm" id=parcela name="subparcela">
+                            <% arreglosubparcela.forEach((subparcela)=>{ %>
+
+                                <option value=<%= subparcela.id %>>
+                                    <%= subparcela.codigo %>
+
+                                </option>
+                            <% }) %>
+
+                        </select>
+                    </div>
                 </div>
+
+
+                <br>
+                <br>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr align="center">
+                        <th scope="col">SUBPARCELA</th>
+                        <th scope="col"> TEMPERATURA</th>
+                        <th scope="col">HUMEDAD</th>
+                        <th scope="col">RIEGO</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr align="center">
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        <td>@fat</td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
 
 
             </form>

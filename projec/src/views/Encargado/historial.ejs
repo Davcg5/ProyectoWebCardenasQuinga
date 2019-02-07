@@ -52,7 +52,7 @@
                 <ul class="nav justify-content-end">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/Rol/menuEncargado" style="color: black">Ménu Encargado</a>
+                        <a class="nav-link" href="/Encargado/menu" style="color: black">Ménu Encargado</a>
                     </li>
 
                 </ul>
@@ -62,18 +62,73 @@
             <br>
             <h1>HISTORIAL</h1>
 
-
+            <BR>
             <form action=""
                   method="POST">
 
                 <div class="row">
 
 
+                    <div class="col">
+
+                        <label for="parcela">Seleccionar Parcela:</label>
+                        <select class="form-control-sm" id=parcela name="parcela">
+                            <% arregloparcela.forEach((parcela)=>{ %>
+
+                                <option value=<%= parcela.id %>>
+                                    <%= parcela.codigo %>
+
+                                </option>
+                            <% }) %>
+
+                        </select>
 
 
+                    </div>
 
 
+                    <div class="col">
+
+                        <label for="subparcela">Seleccionar Subparcela:</label>
+                        <select class="form-control-sm" id=parcela name="subparcela">
+                            <% arreglosubparcela.forEach((subparcela)=>{ %>
+
+                                <option value=<%= subparcela.id %>>
+                                    <%= subparcela.codigo %>
+
+                                </option>
+                            <% }) %>
+
+                        </select>
+                    </div>
                 </div>
+
+
+                <br>
+                <br>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr align="center">
+                        <th scope="col">SUBPARCELA</th>
+                        <th scope="col"> TEMPERATURA PROMEDIO</th>
+                        <th scope="col">HUMEDAD PROMEDIO</th>
+                        <th scope="col">PROMEDIO</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr align="center">
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        <td>@fat</td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
 
 
             </form>

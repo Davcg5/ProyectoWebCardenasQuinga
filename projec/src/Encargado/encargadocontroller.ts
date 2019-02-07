@@ -4,6 +4,10 @@ import {RegionService} from "../Region/region.service";
 import {EncargadoService} from "./encargado.service";
 import {ParcelaService} from "../Parcela/parcela.service";
 import {SubparcelaService} from "../Subparcela/subparcela.service";
+import {HaciendaEntity} from "../hacienda/hacienda.entity";
+import {RolEntity} from "../rol/rol.entity";
+import {ParcelaEntity} from "../Parcela/parcela.entity";
+import {SubparcelaEntity} from "../Subparcela/subparcela.entity";
 
 @Controller('Encargado')
 export class Encargadocontroller {
@@ -12,8 +16,6 @@ export class Encargadocontroller {
         private readonly _encargadoService: EncargadoService,
         private readonly _parcelaService: ParcelaService,
         private readonly _subparcelaService: SubparcelaService,
-
-
     ) {
     }
 
@@ -45,18 +47,48 @@ export class Encargadocontroller {
 
 
     @Get('historial')
-    historial(
+    async historial(
         @Res()
             response,
         @Session()
             sesion
     ) {
 
+        let parcela: ParcelaEntity[];
+        parcela = await
+            this._parcelaService.buscar();
+
+        let subparcela: SubparcelaEntity[];
+        subparcela = await
+            this._subparcelaService.buscar();
+
+        response.render('Encargado/historial', {
+            arregloparcela: parcela,
+            arreglosubparcela: subparcela
+        });
+    }
 
 
+    @Get('monitoreo')
+    async monitoreo(
+        @Res()
+            response,
+        @Session()
+            sesion
+    ) {
 
+        let parcela: ParcelaEntity[];
+        parcela = await
+            this._parcelaService.buscar();
 
-        response.render('Encargado/historial', {});
+        let subparcela: SubparcelaEntity[];
+        subparcela = await
+            this._subparcelaService.buscar();
+
+        response.render('Encargado/monitoreo', {
+            arregloparcela: parcela,
+            arreglosubparcela: subparcela
+        });
     }
 
 }
