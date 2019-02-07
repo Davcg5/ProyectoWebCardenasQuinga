@@ -20,6 +20,9 @@ import {RolModules} from "./rol/rol.modules";
 import {ParcelaModule} from "./Parcela/parcela.module";
 import {SubparcelaModule} from "./Subparcela/subparcela.module";
 import {SensorModule} from "./Sensor/sensor.module";
+import {RolUsuarioEntity} from "./RolUsuario/rolUsuario.entity";
+import {RolUsuarioModules} from "./RolUsuario/rolUsuario.modules";
+import {EncargadoModule} from "./Encargado/encargado.module";
 
 @Module({
         imports: [
@@ -29,8 +32,12 @@ import {SensorModule} from "./Sensor/sensor.module";
                     host: 'localhost',
                     port: 3306,
 
-                    username: 'root',
-                    password: 'password',
+                    /*username: 'root',
+                    password: 'password',*/
+
+                    username: 'vinicioQ',
+                    password: '98765432',
+
                     database: 'webproject',
                     synchronize: true,
                     dropSchema: false,
@@ -42,19 +49,21 @@ import {SensorModule} from "./Sensor/sensor.module";
                         SensorEntity,
                         LecturaEntity,
                         SubparcelaEntity,
-                        RolEntity
+                        RolEntity,
+                        RolUsuarioEntity
                     ]
                 }),
 
 
             RegionModule,
             UsuarioModule,
-          HaciendaModule,
+            HaciendaModule,
             ParcelaModule,
-SubparcelaModule,
+            SubparcelaModule,
             SensorModule,
-
-            RolModules
+            RolUsuarioModules,
+            RolModules,
+            EncargadoModule
         ], // Modulos
         controllers: [AppController], // Controllers
         providers: [

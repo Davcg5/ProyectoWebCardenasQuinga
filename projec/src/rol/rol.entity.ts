@@ -1,9 +1,20 @@
-import {BeforeInsert, ManyToMany, JoinTable, ManyToOne, Column, Entity, Index, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {
+    BeforeInsert,
+    ManyToMany,
+    JoinTable,
+    ManyToOne,
+    Column,
+    Entity,
+    Index,
+    OneToMany,
+    PrimaryGeneratedColumn
+} from "typeorm";
 
 import {HaciendaEntity} from "../hacienda/hacienda.entity";
 import {UsuarioEntity} from "../Usuario/usuario.entity";
 import {SubparcelaEntity} from "../Subparcela/subparcela.entity";
 import {LecturaEntity} from "../Lectura/lectura.entity";
+import {RolUsuarioEntity} from "../RolUsuario/rolUsuario.entity";
 
 @Entity('rol')
 
@@ -38,10 +49,15 @@ export class RolEntity {
         console.log('Ejecuta despues de antes de insertar');
     }
 
-    @ManyToMany(
-        type => UsuarioEntity
+
+    //////////////////////////////////////////////
+
+
+    @OneToMany(
+        type => RolEntity, // Tipo de Dato Un Usuario a muchos
+
+        roles => roles.idRol // Cual es el campo FK
     )
-    @JoinTable()
-    usuarios:UsuarioEntity[]
+    rolesUsuarios: RolUsuarioEntity[];
 
 }

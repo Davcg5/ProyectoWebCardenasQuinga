@@ -117,15 +117,12 @@
 
                         </select> *
 
-
-
-
                     </div>
 
                     <div class="col">
 
-                        <label for="rol">Seleccionar Rol:</label>
-                        <select class="form-control-sm" id=rol name="rol">
+                        <label for="rolUsuario">Seleccionar Rol:</label>
+                        <select class="form-control-sm" id=rolUsuario name="rolUsuario">
                             <% arregloRol.forEach((rol)=>{ %>
 
                                 <option value=<%= rol.idRol %>>
@@ -134,7 +131,7 @@
                                 </option>
                             <% }) %>
 
-                        </select> *
+                        </select>
 
 
 
@@ -165,23 +162,6 @@
 </center>
 
 
-<script>
-
-
-    const etiquetaSelectRegiones = document
-        .getElementById('hacienda');
-
-    arregloHacienda
-        .forEach(
-            (hacienda) => {
-                const nuevaOption = document.createElement('option');
-                nuevaOption.value = hacienda.id;
-                nuevaOption.innerText = hacienda.nombre;
-                etiquetaSelectRegiones.appendChild(nuevaOption);
-            }
-        )
-    re
-</script>
 
 
 <script>

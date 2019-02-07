@@ -54,7 +54,7 @@ export class ParcelaEntity {
 
     @OneToMany(
     type => SubparcelaEntity,
-    subparcela => subparcela.parcelas
+    subparcela => subparcela.parcela
 
 )
     subparcelas: SubparcelaEntity[]

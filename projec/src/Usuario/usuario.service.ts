@@ -24,7 +24,7 @@ export class UsuarioService {
 
 
     async crear(nuevoUsuario: Usuario): Promise<UsuarioEntity> {
-
+        console.log(nuevoUsuario.rolUsuario,2)
         // Instanciar una entidad -> .create()
         const usuarioEntity = this._usuarioRepository.create(nuevoUsuario);
         const usuarioCreado = await this._usuarioRepository.save(usuarioEntity);
@@ -42,8 +42,7 @@ export class UsuarioService {
 
     borrar(idUsuario: number): Promise<UsuarioEntity> {
         const usuarioEntityAEliminar = this._usuarioRepository.create({
-            idUsuario: idUsuario
-        });
+            idUsuario: idUsuario});
         return this._usuarioRepository.remove(usuarioEntityAEliminar)
     }
 
@@ -96,4 +95,5 @@ export interface Usuario {
     telefonoUsuario?: string;
     contraseñaUsuario: string;
     hacienda:any
+    rolUsuario?:number
 }

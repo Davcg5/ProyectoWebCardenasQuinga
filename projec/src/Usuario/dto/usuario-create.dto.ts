@@ -2,7 +2,7 @@ import {IsEmpty, IsNotEmpty, IsNumber, IsString, Length} from "class-validator";
 
 export class UsuarioCreateDto {
 
-
+/*
     @IsNotEmpty()
     @IsString()
     @Length(5, 30)
@@ -29,6 +29,6 @@ export class UsuarioCreateDto {
     telefonoUsuario: string;
 
     @IsNotEmpty()
-    hacienda: number
+    hacienda: number*/
 
 }
