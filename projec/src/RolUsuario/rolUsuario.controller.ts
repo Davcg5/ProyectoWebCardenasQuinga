@@ -11,10 +11,12 @@ export class RolUsuarioController {
 
     }
 
-    @Get()
-    test(){
 
-        this.__rolUsuarioService.crear()
+    @Get('')
+    todos() {
+        this.__rolUsuarioService.todos().then(res => {
+            console.log("csdcsdcsdcsdc", res)
+        })
     }
 
 

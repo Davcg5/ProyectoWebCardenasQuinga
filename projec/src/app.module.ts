@@ -22,6 +22,7 @@ import {SubparcelaModule} from "./Subparcela/subparcela.module";
 import {SensorModule} from "./Sensor/sensor.module";
 import {RolUsuarioEntity} from "./RolUsuario/rolUsuario.entity";
 import {RolUsuarioModules} from "./RolUsuario/rolUsuario.modules";
+import {EncargadoModule} from "./Encargado/encargado.module";
 
 @Module({
         imports: [
@@ -61,7 +62,8 @@ import {RolUsuarioModules} from "./RolUsuario/rolUsuario.modules";
             SubparcelaModule,
             SensorModule,
             RolUsuarioModules,
-            RolModules
+            RolModules,
+            EncargadoModule
         ], // Modulos
         controllers: [AppController], // Controllers
         providers: [

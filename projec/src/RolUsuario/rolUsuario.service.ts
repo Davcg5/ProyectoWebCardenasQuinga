@@ -22,11 +22,10 @@ export class RolUsuarioService {
     }
 
 
-    async crear(rolUsuario:any): Promise<RolUsuarioEntity> {
+    async crear(rolUsuario: any): Promise<RolUsuarioEntity> {
 
 
-        // Instanciar una entidad -> .create()
-        //const rolUsuarioEntity = this._rolUsuarioRepository.create();
+
 
         const rolUsuarioCreado = await this._rolUsuarioRepository.save(rolUsuario);
         return rolUsuarioCreado;
@@ -34,9 +33,16 @@ export class RolUsuarioService {
     }
 
 
+
+    todos(parametros?: FindManyOptions<RolUsuarioEntity>)
+        : Promise<RolUsuarioEntity[]> {
+        return this._rolUsuarioRepository.find(parametros);
+    }
+
 }
 
 export interface RolesUsuario {
-     usuarios:number,
+    usuarios: number,
+    roles: number
 
 }

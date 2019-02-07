@@ -154,7 +154,7 @@ export class UsuarioController {
         } else {
             console.log(usuario.rolUsuario, 1);
 
-            this.__usuarioService.crear(usuario)
+          await  this.__usuarioService.crear(usuario)
                 .then((res: Usuario) => {
                     console.log(res.idUsuario);
 
