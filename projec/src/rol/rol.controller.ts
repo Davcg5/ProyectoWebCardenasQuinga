@@ -12,7 +12,7 @@ export class RolController {
 
     constructor(
         private readonly __rolService: RolService,
-     ) {
+    ) {
 
     }
 
@@ -28,5 +28,35 @@ export class RolController {
         });
     }
 
+
+    @Get('menuEncargado')
+    menuEncargado(
+        @Res() response,
+        @Session() sesion
+    ) {
+        console.log(sesion);
+        response.render('Encargado/menuEncargado', {
+            sessionUsuario: sesion.usuario
+        });
+    }
+
+    @Get('notificaciones')
+    notificaciones(
+        @Res() response,
+        @Session() sesion
+    ) {
+        response.render('Encargado/notificaciones', {
+            sessionUsuario: sesion.usuario
+        });
+    }
+
+
+    @Get('historial')
+    historial(
+        @Res() response,
+        @Session() sesion
+    ) {
+        response.render('Encargado/historial', {});
+    }
 
 }

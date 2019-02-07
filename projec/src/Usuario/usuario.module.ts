@@ -6,6 +6,8 @@ import {UsuarioEntity} from "./usuario.entity";
 import {RolEntity} from "../rol/rol.entity";
 import {RolModules} from "../rol/rol.modules";
 import {HaciendaModule} from "../hacienda/hacienda.module";
+import {RolUsuarioController} from "../RolUsuario/rolUsuario.controller";
+import {RolUsuarioModules} from "../RolUsuario/rolUsuario.modules";
 
 
 @Module({
@@ -13,7 +15,7 @@ import {HaciendaModule} from "../hacienda/hacienda.module";
 
         TypeOrmModule.forFeature([
             UsuarioEntity
-        ]),HaciendaModule,RolModules
+        ]), HaciendaModule, RolModules, RolUsuarioModules
 
     ],
     controllers: [

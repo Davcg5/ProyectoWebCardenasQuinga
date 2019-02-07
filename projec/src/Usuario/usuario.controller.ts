@@ -9,6 +9,7 @@ import {UsuarioCreateDto} from "./dto/usuario-create.dto";
 import {validate, ValidationError} from "class-validator";
 import {UsuarioUpdateDto} from "./dto/usuario-update.dto";
 import {RolService} from "../rol/rol.service";
+import {RolUsuarioService} from "../RolUsuario/rolUsuario.service";
 
 @Controller('Usuario')
 
@@ -17,7 +18,8 @@ export class UsuarioController {
     constructor(
         private readonly __usuarioService: UsuarioService,
         private readonly _haciendaService: HaciendaService,
-        private readonly _rolservice: RolService
+        private readonly _rolservice: RolService,
+        private readonly _rolUsuarioservice: RolUsuarioService
     ) {
 
 
@@ -125,19 +127,20 @@ export class UsuarioController {
 
 //CREAR USUARIO Y GUARDAR EN LA BASE DE DATOS
     @Post('crear-usuario')
-     async crearRegionFormulario(
+    async crearRegionFormulario(
         @Body()
             usuario: Usuario,
         @Res()
             response,) {
 
-        const usuariovalidado = new UsuarioCreateDto();/*
-        usuariovalidado.nombreUsuario = usuario.nombreUsuario;
-        usuariovalidado.cedulaUsuario = usuario.cedulaUsuario;
-        usuariovalidado.direccionUsuario = usuario.direccionUsuario;
-        usuariovalidado.telefonoUsuario = usuario.telefonoUsuario;
-        usuariovalidado.contraseñaUsuario = usuario.contraseñaUsuario;
-        usuariovalidado.hacienda = usuario.hacienda;*/
+        const usuariovalidado = new UsuarioCreateDto();
+        /*
+                usuariovalidado.nombreUsuario = usuario.nombreUsuario;
+                usuariovalidado.cedulaUsuario = usuario.cedulaUsuario;
+                usuariovalidado.direccionUsuario = usuario.direccionUsuario;
+                usuariovalidado.telefonoUsuario = usuario.telefonoUsuario;
+                usuariovalidado.contraseñaUsuario = usuario.contraseñaUsuario;
+                usuariovalidado.hacienda = usuario.hacienda;*/
 
 
         const errores: ValidationError[] = await validate(usuariovalidado);
@@ -149,29 +152,28 @@ export class UsuarioController {
 
 
         } else {
-            console.log(usuario)
+            console.log(usuario.rolUsuario, 1);
 
-                this.__usuarioService.crear(usuario).then(res=>{
-                    console.log(res.idUsuario)
-                    console.log(res.hacienda)
+            this.__usuarioService.crear(usuario)
+                .then((res: Usuario) => {
+                    console.log(res.idUsuario);
 
+                    console.log(usuario.rolUsuario, 444444);
 
+                    const rolUsuarioCrear = {
+                        usuarios: res.idUsuario,
+                        roles: usuario.rolUsuario
+                    }
 
-
-
-
-
-
-
-
-
-
+                    this._rolUsuarioservice.crear(rolUsuarioCrear).then(resp => {
+                        console.log('se creo')
+                    })
                 });
+
 
             const parametrosConsulta = `?accion=crear&nombre=${usuario.nombreUsuario}`;
 
             response.redirect('/Usuario/usuario' + parametrosConsulta)
-
 
 
         }

@@ -1,10 +1,10 @@
-import {Body, Controller, Get, Param, Post, Query, Res} from "@nestjs/common";
+import {Body, Controller, Get, Param, Post, Query, Res, Session} from "@nestjs/common";
 
 import {Like} from "typeorm";
 
 import {validate, ValidationError} from "class-validator";
 import {HaciendaEntity} from "../hacienda/hacienda.entity";
-import {Hacienda,HaciendaService} from "../hacienda/hacienda.service";
+import {Hacienda, HaciendaService} from "../hacienda/hacienda.service";
 import {UsuarioEntity} from "../Usuario/usuario.entity";
 import {Usuario, UsuarioService} from "../Usuario/usuario.service";
 import {Parcela, ParcelaService} from "./parcela.service";
@@ -18,10 +18,11 @@ export class ParcelaController {
     usuarios: Usuario
 
     constructor(
-        private readonly _parcelaService:ParcelaService,
+        private readonly _parcelaService: ParcelaService,
         private readonly _haciendaService: HaciendaService,
         private readonly _usuarioService: UsuarioService
-    ) {}
+    ) {
+    }
 
 
     @Get('parcela')
@@ -97,18 +98,17 @@ export class ParcelaController {
         @Res() response
     ) {
 
-        let haciendas:HaciendaEntity[]
-        let usuarios:UsuarioEntity[]
-        haciendas =await this._haciendaService.buscar()
-        usuarios =await this._usuarioService.buscar()
+        let haciendas: HaciendaEntity[]
+        let usuarios: UsuarioEntity[]
+        haciendas = await this._haciendaService.buscar()
+        usuarios = await this._usuarioService.buscar()
 
         response.render(
             'crear-parcela',
             {
-                arregloHaciendas:haciendas,
-                arregloUsuarios:usuarios
+                arregloHaciendas: haciendas,
+                arregloUsuarios: usuarios
             }
-
         )
     }
 
@@ -117,10 +117,10 @@ export class ParcelaController {
         @Param('idParcela') idParcela: string,
         @Res() response
     ) {
-        let haciendas:HaciendaEntity[]
-        let usuarios:UsuarioEntity[]
-        haciendas=await this._haciendaService.buscar()
-        usuarios=await this._usuarioService.buscar()
+        let haciendas: HaciendaEntity[]
+        let usuarios: UsuarioEntity[]
+        haciendas = await this._haciendaService.buscar()
+        usuarios = await this._usuarioService.buscar()
         const parcelaAActualizar = await this
             ._parcelaService
             .buscarPorId(Number(idParcela));
@@ -128,8 +128,8 @@ export class ParcelaController {
         response.render(
             'crear-parcela', {
                 parcela: parcelaAActualizar,
-                arregloHaciendas:haciendas,
-                arregloUsuarios:usuarios
+                arregloHaciendas: haciendas,
+                arregloUsuarios: usuarios
 
             }
         )
@@ -162,9 +162,9 @@ export class ParcelaController {
 
         parcelaValidada.codigo = parcela.codigo
         parcelaValidada.medidas = parcela.medidas
-        parcelaValidada.hacienda= parcela.hacienda
-        parcelaValidada.usuario= parcela.usuario
-            const errores: ValidationError[] = await validate(parcelaValidada)
+        parcelaValidada.hacienda = parcela.hacienda
+        parcelaValidada.usuario = parcela.usuario
+        const errores: ValidationError[] = await validate(parcelaValidada)
 
         const hayErrores = errores.length > 0;
 
@@ -174,11 +174,11 @@ export class ParcelaController {
         }
         else {
             const parcelaFinal = {
-                id:parcela.id,
-                codigo:parcela.codigo,
-                medidas:parcela.medidas,
-                hacienda:parcela.hacienda,
-                usuario:parcela.usuario
+                id: parcela.id,
+                codigo: parcela.codigo,
+                medidas: parcela.medidas,
+                hacienda: parcela.hacienda,
+                usuario: parcela.usuario
             }
             await this._parcelaService.crear(parcelaFinal);
 
@@ -186,6 +186,16 @@ export class ParcelaController {
 
             response.redirect('/Parcela/parcela' + parametrosConsulta)
         }
+    }
+
+
+    @Get('parcelasSuboparcelas')
+    parcelaSubparcela(
+        @Res() response,
+        @Session() sesion
+    ) {
+         response.render('parcelas-subparcelas', {
+         });
     }
 }
 

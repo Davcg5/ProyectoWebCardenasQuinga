@@ -20,6 +20,8 @@ import {RolModules} from "./rol/rol.modules";
 import {ParcelaModule} from "./Parcela/parcela.module";
 import {SubparcelaModule} from "./Subparcela/subparcela.module";
 import {SensorModule} from "./Sensor/sensor.module";
+import {RolUsuarioEntity} from "./RolUsuario/rolUsuario.entity";
+import {RolUsuarioModules} from "./RolUsuario/rolUsuario.modules";
 
 @Module({
         imports: [
@@ -46,18 +48,19 @@ import {SensorModule} from "./Sensor/sensor.module";
                         SensorEntity,
                         LecturaEntity,
                         SubparcelaEntity,
-                        RolEntity
+                        RolEntity,
+                        RolUsuarioEntity
                     ]
                 }),
 
 
             RegionModule,
             UsuarioModule,
-          HaciendaModule,
+            HaciendaModule,
             ParcelaModule,
-SubparcelaModule,
+            SubparcelaModule,
             SensorModule,
-
+            RolUsuarioModules,
             RolModules
         ], // Modulos
         controllers: [AppController], // Controllers

@@ -1,8 +1,8 @@
-
 import {BeforeInsert, ManyToOne, Column, Entity, Index, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {RegionEntity} from "../Region/region.entity";
 import {HaciendaEntity} from "../hacienda/hacienda.entity";
 import {ParcelaEntity} from "../Parcela/parcela.entity";
+import {RolUsuarioEntity} from "../RolUsuario/rolUsuario.entity";
 
 @Entity('usuario')
 
@@ -58,13 +58,28 @@ export class UsuarioEntity {
 
         hacienda => hacienda.usuarios, {eager: true} // Cual es el campo FK
     )
-    hacienda: HaciendaEntity
+    hacienda: HaciendaEntity;
+
 
     @OneToMany(
         type => ParcelaEntity, // Tipo de Dato Un Usuario a muchos
 
         parcela => parcela.usuario // Cual es el campo FK
     )
-    parcelas: ParcelaEntity[]
+    parcelas: ParcelaEntity[];
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////
+
+    @OneToMany(
+        type => RolUsuarioEntity, // Tipo de Dato Un Usuario a muchos
+
+        rolUsuario => rolUsuario.idRolUsuario // Cual es el campo FK
+    )
+    rolUsuarios: RolUsuarioEntity;
+
+
 }
 
