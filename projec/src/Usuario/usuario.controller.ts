@@ -1,4 +1,15 @@
-import {Body, Controller, Get, Param, Post, Query, Res, Session} from "@nestjs/common";
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    ForbiddenException,
+    Get,
+    Param,
+    Post,
+    Query,
+    Res,
+    Session
+} from "@nestjs/common";
 import {Usuario, UsuarioService} from "./usuario.service";
 import {UsuarioEntity} from "./usuario.entity";
 import {Like} from "typeorm";
@@ -88,16 +99,28 @@ export class UsuarioController {
             usuarios = await
                 this.__usuarioService.buscar();
         }
-        response.render('UsuarioPantalla/usuario', {
-            nombreUsuario: 'Vinicio',
-            arregloUsuario: usuarios,
-            mensajeUsuario: mensaje,
-            accionUsuario: clase,
-            session: sesion.usuario
 
-        })
+        if (sesion.usuario) {
+
+            if (sesion.rolUsuario == 1) {
+                response.render('UsuarioPantalla/usuario', {
+                    nombreUsuario: 'Vinicio',
+                    arregloUsuario: usuarios,
+                    mensajeUsuario: mensaje,
+                    accionUsuario: clase,
+                    session: sesion.usuario
+                })
+            }
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'})
+
+            }
 
 
+        }
+        else {
+            throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
+        }
     }
 
 
@@ -105,7 +128,9 @@ export class UsuarioController {
     @Get('crear-usuario')
     async crearRegion(
         @Res()
-            response
+            response,
+        @Session()
+            sesion
     ) {
 
 
@@ -117,12 +142,24 @@ export class UsuarioController {
         rol = await
             this._rolservice.buscar();
 
-        response.render(
-            'UsuarioPantalla/crear-usuario', {
-                arregloRol: rol,
-                arregloHacienda: hacienda
+        if (sesion.usuario) {
 
-            });
+            if (sesion.rolUsuario == 1) {
+                response.render(
+                    'UsuarioPantalla/crear-usuario', {
+                        arregloRol: rol,
+                        arregloHacienda: hacienda
+                    });
+            }
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'})
+            }
+
+        } else {
+            throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
+
+        }
+
     }
 
 //CREAR USUARIO Y GUARDAR EN LA BASE DE DATOS
@@ -134,13 +171,13 @@ export class UsuarioController {
             response,) {
 
         const usuariovalidado = new UsuarioCreateDto();
-        /*
-                usuariovalidado.nombreUsuario = usuario.nombreUsuario;
-                usuariovalidado.cedulaUsuario = usuario.cedulaUsuario;
-                usuariovalidado.direccionUsuario = usuario.direccionUsuario;
-                usuariovalidado.telefonoUsuario = usuario.telefonoUsuario;
-                usuariovalidado.contraseñaUsuario = usuario.contraseñaUsuario;
-                usuariovalidado.hacienda = usuario.hacienda;*/
+
+        usuariovalidado.nombreUsuario = usuario.nombreUsuario;
+        usuariovalidado.cedulaUsuario = usuario.cedulaUsuario;
+        usuariovalidado.direccionUsuario = usuario.direccionUsuario;
+        usuariovalidado.telefonoUsuario = usuario.telefonoUsuario;
+        usuariovalidado.contraseñaUsuario = usuario.contraseñaUsuario;
+        usuariovalidado.hacienda = usuario.hacienda;
 
 
         const errores: ValidationError[] = await validate(usuariovalidado);
@@ -148,13 +185,14 @@ export class UsuarioController {
 
 
         if (hayerrores) {
+            console.log(errores)
             response.redirect('/Usuario/crear-usuario?error= hay error');
 
 
         } else {
             console.log(usuario.rolUsuario, 1);
 
-          await  this.__usuarioService.crear(usuario)
+            await this.__usuarioService.crear(usuario)
                 .then((res: Usuario) => {
                     console.log(res.idUsuario);
 
@@ -224,11 +262,16 @@ export class UsuarioController {
         hacienda = await
             this._haciendaService.buscar();
 
+        let rol: RolEntity[];
+        rol = await
+            this._rolservice.buscar();
+
 
         response.render(
             'UsuarioPantalla/crear-usuario', {//ir a la pantalla de crear-usuario
                 usuario: usuarioAActualizar,
-                arregloHacienda: hacienda
+                arregloHacienda: hacienda,
+                arregloRol: rol
             }
         )
     }

@@ -1,4 +1,15 @@
-import {Body, Controller, Get, Param, Post, Query, Res} from "@nestjs/common";
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    ForbiddenException,
+    Get,
+    Param,
+    Post,
+    Query,
+    Res,
+    Session
+} from "@nestjs/common";
 
 import {Like} from "typeorm";
 
@@ -17,10 +28,10 @@ export class SubparcelaController {
 
 
     constructor(
-
-        private readonly _parcelaService:ParcelaService,
-        private readonly _subparcelaService:SubparcelaService
-    ) {}
+        private readonly _parcelaService: ParcelaService,
+        private readonly _subparcelaService: SubparcelaService
+    ) {
+    }
 
 
     @Get('subparcela')
@@ -29,6 +40,7 @@ export class SubparcelaController {
         @Query('accion') accion: string,
         @Query('codigo') codigo: string,
         @Query('busqueda') busqueda: string,
+        @Session() sesion
     ) {
 
 
@@ -68,12 +80,25 @@ export class SubparcelaController {
             subparcelas = await this._subparcelaService.buscar();
         }
 
-        response.render('subparcela', {
-            nombre: 'David',
-            arreglo: subparcelas,
-            mensaje: mensaje,
-            accion: clase
-        });
+        if (sesion.usuario) {
+            if (sesion.rolUsuario == 1) {
+                response.render('subparcela', {
+                    nombre: 'David',
+                    arreglo: subparcelas,
+                    mensaje: mensaje,
+                    accion: clase
+                });
+            }
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'});
+            }
+        }
+        else {
+            throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
+
+        }
+
+
     }
 
     @Post('borrar/:idSubparcela')
@@ -93,19 +118,34 @@ export class SubparcelaController {
 
     @Get('crear-subparcela')
     async crearSubparcela(
-        @Res() response
+        @Res() response,
+        @Session() sesion
     ) {
 
-        let parcelas:ParcelaEntity[]
-        parcelas =await this._parcelaService.buscar()
+        let parcelas: ParcelaEntity[];
+        parcelas = await this._parcelaService.buscar();
 
-        response.render(
-            'crear-subparcela',
-            {
-                arregloParcelas:parcelas
+        if (sesion.usuario) {
+            if (sesion.rolUsuario == 1) {
+                response.render(
+                    'crear-subparcela',
+                    {
+                        arregloParcelas: parcelas
+                    }
+                )
+            }
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'});
+
             }
 
-        )
+
+        } else {
+            throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
+
+        }
+
+
     }
 
     @Get('actualizar-subparcela/:idSubparcela')
@@ -113,8 +153,8 @@ export class SubparcelaController {
         @Param('idSubparcela') idSubparcela: string,
         @Res() response
     ) {
-        let parcelas:ParcelaEntity[]
-        parcelas =await this._parcelaService.buscar()
+        let parcelas: ParcelaEntity[]
+        parcelas = await this._parcelaService.buscar()
 
         const subparcelaAActualizar = await this
             ._subparcelaService
@@ -123,7 +163,7 @@ export class SubparcelaController {
         response.render(
             'crear-subparcela', {
                 subparcela: subparcelaAActualizar,
-                arregloParcelas:parcelas
+                arregloParcelas: parcelas
 
 
             }
@@ -157,7 +197,7 @@ export class SubparcelaController {
 
         subparcelaValidada.codigo = subparcela.codigo
         subparcelaValidada.medidas = subparcela.medidas
-        subparcelaValidada.parcela= +subparcela.parcela
+        subparcelaValidada.parcela = +subparcela.parcela
 
         const errores: ValidationError[] = await validate(subparcelaValidada)
 
@@ -169,10 +209,10 @@ export class SubparcelaController {
         }
         else {
             const subparcelaFinal = {
-                id:subparcela.id,
-                codigo:subparcela.codigo,
-                medidas:subparcela.medidas,
-               parcela:+subparcela.parcela
+                id: subparcela.id,
+                codigo: subparcela.codigo,
+                medidas: subparcela.medidas,
+                parcela: +subparcela.parcela
             }
             await this._subparcelaService.crear(subparcelaFinal);
 

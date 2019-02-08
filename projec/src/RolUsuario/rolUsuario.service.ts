@@ -24,9 +24,6 @@ export class RolUsuarioService {
 
     async crear(rolUsuario: any): Promise<RolUsuarioEntity> {
 
-
-
-
         const rolUsuarioCreado = await this._rolUsuarioRepository.save(rolUsuario);
         return rolUsuarioCreado;
 
@@ -42,7 +39,7 @@ export class RolUsuarioService {
 }
 
 export interface RolesUsuario {
-    usuarios: number,
-    roles: number
+  //  usuarios: number,
+   // roles: number
 
 }

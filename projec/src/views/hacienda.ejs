@@ -1,25 +1,8 @@
-<!doctype html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hacienda</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet"
-          href="/bootstrap-4.0.0-dist/css/animate.css">
-
-    <link rel="stylesheet"
-          href="/projec/bootstrap-4.0.0-dist/css/mis-estilos.css">
-</head>
-<body>
+<%- include('comunes/header',{titulo:'Hacienda'}) %>
 
 
-
-
-
+<br>
+<br>
 
 <center>
 <div class="container">
@@ -59,20 +42,6 @@
     <!-- a -> anchor-->
 
 
-    <script>
-        function holaMundo(evento) {
-            console.log(evento)
-            evento.preventDefault();
-            const respuesta = confirm('¿Estas seguro?')
-            console.log('Hola mundo')
-        }
-        function borrar(evento) {
-            const respuesta = confirm('¿Estas seguro?')
-            if (!respuesta) {
-                event.preventDefault();
-            }
-        }
-    </script>
 
 
     <form action="/Hacienda/Hacienda" method="get">
@@ -163,5 +132,5 @@
 
 </div>
 </center>
-</body>
-</html>
+<%- include('comunes/librerias') %>
+<%- include('comunes/footer') %>

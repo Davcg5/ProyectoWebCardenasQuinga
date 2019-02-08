@@ -1,4 +1,4 @@
-import {Controller, Get, Res, Session} from "@nestjs/common";
+import {BadRequestException, Body, Controller, Get, Res, Session} from "@nestjs/common";
 import {HaciendaService} from "../hacienda/hacienda.service";
 import {RegionService} from "../Region/region.service";
 import {EncargadoService} from "./encargado.service";
@@ -25,12 +25,32 @@ export class Encargadocontroller {
         @Res()
             response,
         @Session()
-            sesion
-    ) {
+            sesion,
+        @Body('rolUsuario') rolUsuario: number,
+s     ) {
         console.log(sesion);
-        response.render('Encargado/menuEncargado', {
-            sessionUsuario: sesion.usuario
-        });
+        sesion.rolUsuario;
+
+        if (sesion.usuario) {
+
+            if (sesion.rolUsuario == 2) {
+
+                response.render('Encargado/menuEncargado', {
+                    sessionUsuario: sesion.usuario
+                });
+
+            } else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'})
+
+            }
+
+
+        }
+        else {
+            throw new BadRequestException({mensaje: 'Error Inicia Sesión'})
+
+        }
+
     }
 
     @Get('notificaciones')
@@ -40,9 +60,26 @@ export class Encargadocontroller {
         @Session()
             sesion
     ) {
-        response.render('Encargado/notificaciones', {
-            sessionUsuario: sesion.usuario
-        });
+
+        if (sesion.usuario) {
+
+            if (sesion.rolUsuario == 2) {
+                response.render('Encargado/notificaciones', {
+                    sessionUsuario: sesion.usuario
+                });
+            }
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'})
+
+            }
+
+
+        }
+        else {
+            throw new BadRequestException({mensaje: 'Error Inicia Sesión'})
+
+        }
+
     }
 
 
@@ -62,10 +99,29 @@ export class Encargadocontroller {
         subparcela = await
             this._subparcelaService.buscar();
 
-        response.render('Encargado/historial', {
-            arregloparcela: parcela,
-            arreglosubparcela: subparcela
-        });
+        if (sesion.usuario) {
+
+
+            if (sesion.rolUsuario == 2) {
+
+                response.render('Encargado/historial', {
+                    arregloparcela: parcela,
+                    arreglosubparcela: subparcela
+                });
+
+            }
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'})
+
+            }
+
+        }
+        else {
+            throw new BadRequestException({mensaje: 'Error Inicia Sesión'})
+
+        }
+
+
     }
 
 
@@ -81,14 +137,32 @@ export class Encargadocontroller {
         parcela = await
             this._parcelaService.buscar();
 
+
         let subparcela: SubparcelaEntity[];
         subparcela = await
             this._subparcelaService.buscar();
 
-        response.render('Encargado/monitoreo', {
-            arregloparcela: parcela,
-            arreglosubparcela: subparcela
-        });
+
+        if (sesion.usuario) {
+
+            if (sesion.rolUsuario == 2) {
+                response.render('Encargado/monitoreo', {
+                    arregloparcela: parcela,
+                    arreglosubparcela: subparcela
+                });
+            }
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'})
+
+            }
+
+
+        } else {
+            throw new BadRequestException({mensaje: 'Error Inicia Sesión'})
+
+        }
+
+
     }
 
 }

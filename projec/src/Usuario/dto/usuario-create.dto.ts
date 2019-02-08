@@ -2,7 +2,7 @@ import {IsEmpty, IsNotEmpty, IsNumber, IsString, Length} from "class-validator";
 
 export class UsuarioCreateDto {
 
-/*
+
     @IsNotEmpty()
     @IsString()
     @Length(5, 30)
@@ -14,7 +14,7 @@ export class UsuarioCreateDto {
     direccionUsuario: string;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsString()
     @Length(10)
     cedulaUsuario: string;
 
@@ -24,11 +24,11 @@ export class UsuarioCreateDto {
     contraseñaUsuario: string;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsString()
     @Length(9, 10)
     telefonoUsuario: string;
 
     @IsNotEmpty()
-    hacienda: number*/
+    hacienda: number
 
 }

@@ -16,7 +16,7 @@ export class RolUsuarioEntity {
     @ManyToOne(
         type => UsuarioEntity, // Tipo de Dato Un Usuario a muchos
 
-        usuario => usuario.idUsuario // Cual es el campo FK
+        usuario => usuario.idUsuario, {eager: true} // Cual es el campo FK
     )
     usuarios: UsuarioEntity;
 
@@ -24,7 +24,7 @@ export class RolUsuarioEntity {
     @ManyToOne(
         type => RolEntity, // Tipo de Dato Un Usuario a muchos
 
-        roles => roles.idRol // Cual es el campo FK
+        roles => roles.idRol, {eager: true} // Cual es el campo FK
     )
     roles: RolEntity;
 

@@ -1,4 +1,15 @@
-import {Body, Controller, Get, Param, Post, Query, Res} from "@nestjs/common";
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    ForbiddenException,
+    Get,
+    Param,
+    Post,
+    Query,
+    Res,
+    Session
+} from "@nestjs/common";
 import {Like} from "typeorm";
 
 import {validate, ValidationError} from "class-validator";
@@ -18,7 +29,8 @@ export class SensorController {
     constructor(
         private readonly _subparcelaService: SubparcelaService,
         private readonly _sensorService: SensorService
-    ) {}
+    ) {
+    }
 
 
     @Get('sensor')
@@ -27,6 +39,7 @@ export class SensorController {
         @Query('accion') accion: string,
         @Query('nombre') codigo: string,
         @Query('busqueda') busqueda: string,
+        @Session() sesion
     ) {
 
 
@@ -65,12 +78,28 @@ export class SensorController {
             sensores = await this._sensorService.buscar();
         }
 
-        response.render('sensor', {
-            nombre: 'David',
-            arreglo: sensores,
-            mensaje: mensaje,
-            accion: clase
-        });
+
+        if (sesion.usuario) {
+            if (sesion.rolUsuario == 1) {
+                response.render('sensor', {
+                    nombre: 'David',
+                    arreglo: sensores,
+                    mensaje: mensaje,
+                    accion: clase
+                });
+
+            }
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'});
+
+            }
+
+
+        }
+        else {
+            throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
+        }
+
     }
 
     @Post('borrar/:idSensor')
@@ -90,17 +119,32 @@ export class SensorController {
 
     @Get('crear-sensores')
     async crearSensor(
-        @Res() response
+        @Res() response,
+        @Session() sesion
     ) {
-        let subparcelas:SubparcelaEntity[]
-        subparcelas=await this._subparcelaService.buscar()
+        let subparcelas: SubparcelaEntity[]
+        subparcelas = await this._subparcelaService.buscar()
 
-        response.render(
-            'crear-sensores',
-            {
-                arregloSubparcelas:subparcelas
+        if (sesion.usuario) {
+            if (sesion.rolUsuario == 1) {
+                response.render(
+                    'crear-sensores',
+                    {
+                        arregloSubparcelas: subparcelas
+                    }
+                )
             }
-        )
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'});
+            }
+        }
+
+        else {
+            throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
+
+
+        }
+
     }
 
     @Get('actualizar-sensores/:idSensor')
@@ -108,8 +152,8 @@ export class SensorController {
         @Param('idSensor') idSensor: string,
         @Res() response
     ) {
-        let subparcelas:SubparcelaEntity[]
-        subparcelas=await this._subparcelaService.buscar()
+        let subparcelas: SubparcelaEntity[]
+        subparcelas = await this._subparcelaService.buscar()
 
         const sensorAActualizar = await this
             ._sensorService
@@ -118,7 +162,7 @@ export class SensorController {
         response.render(
             'crear-sensores', {
                 sensor: sensorAActualizar,
-                arregloSubparcelas:subparcelas
+                arregloSubparcelas: subparcelas
 
             }
         )
@@ -150,7 +194,7 @@ export class SensorController {
         const sensorValidado = new SensorCreateDto()
 
         sensorValidado.codigoSensor = sensor.codigoSensor
-       sensorValidado.subparcela=sensor.subparcela
+        sensorValidado.subparcela = sensor.subparcela
 
         console.log(sensorValidado)
         const errores: ValidationError[] = await validate(sensorValidado)
@@ -163,9 +207,9 @@ export class SensorController {
         }
         else {
             const sensorFinal = {
-                id:sensor.id,
-                codigoSensor:sensor.codigoSensor,
-                subparcela:sensor.subparcela
+                id: sensor.id,
+                codigoSensor: sensor.codigoSensor,
+                subparcela: sensor.subparcela
 
             }
             await this._sensorService.crear(sensorFinal);

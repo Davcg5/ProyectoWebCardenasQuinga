@@ -1,4 +1,4 @@
-import {Controller, Get, Res, Session} from "@nestjs/common";
+import {BadRequestException, Controller, ForbiddenException, Get, Res, Session} from "@nestjs/common";
 import {UsuarioService} from "../Usuario/usuario.service";
 import {RolService} from "./rol.service";
 import {ExpressionStatement} from "typescript";
@@ -17,8 +17,6 @@ export class RolController {
     constructor(
         private readonly __rolService: RolService,
         private readonly __rolUsuarioService: RolUsuarioService,
-
-
     ) {
 
     }
@@ -32,14 +30,21 @@ export class RolController {
     ) {
 
 
-        console.log(sesion);
-        response.render('Administrador/menuAdministrador', {
-            sessionUsuario: sesion.usuario
-        });
+        if (sesion.usuario) {
+            if (sesion.rolUsuario == 1) {
+                console.log(sesion);
+                response.render('Administrador/menuAdministrador', {
+                    sessionUsuario: sesion.usuario
+                });
+            }
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'});
+            }
 
+        }
+        else {
+
+            throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
+        }
     }
-
-
-
-
 }

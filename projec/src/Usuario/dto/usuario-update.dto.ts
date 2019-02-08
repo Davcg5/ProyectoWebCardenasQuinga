@@ -14,7 +14,7 @@ export class UsuarioUpdateDto {
     direccionUsuario: string;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsString()
     @Length(10)
     cedulaUsuario: string;
 
@@ -24,7 +24,7 @@ export class UsuarioUpdateDto {
     contraseñaUsuario: string;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsString()
     @Length(9, 10)
     telefonoUsuario: string;
 

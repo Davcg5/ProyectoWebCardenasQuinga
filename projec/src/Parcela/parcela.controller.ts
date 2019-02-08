@@ -1,4 +1,15 @@
-import {Body, Controller, Get, Param, Post, Query, Res, Session} from "@nestjs/common";
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    ForbiddenException,
+    Get,
+    Param,
+    Post,
+    Query,
+    Res,
+    Session
+} from "@nestjs/common";
 
 import {Like} from "typeorm";
 
@@ -14,8 +25,8 @@ import {ParcelaCreateDto} from "./dto/parcela-create-dto";
 @Controller('Parcela')
 export class ParcelaController {
 
-    haciendas: Hacienda
-    usuarios: Usuario
+    haciendas: Hacienda;
+    usuarios: Usuario;
 
     constructor(
         private readonly _parcelaService: ParcelaService,
@@ -31,6 +42,7 @@ export class ParcelaController {
         @Query('accion') accion: string,
         @Query('nombre') nombre: string,
         @Query('busqueda') busqueda: string,
+        @Session() sesion
     ) {
 
 
@@ -70,12 +82,24 @@ export class ParcelaController {
             parcelas = await this._parcelaService.buscar();
         }
 
-        response.render('parcela', {
-            nombre: 'David',
-            arreglo: parcelas,
-            mensaje: mensaje,
-            accion: clase
-        });
+        if (sesion.usuario) {
+            if (sesion.rolUsuario == 1) {
+                response.render('parcela', {
+                    nombre: 'David',
+                    arreglo: parcelas,
+                    mensaje: mensaje,
+                    accion: clase
+                });
+            }
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'});
+
+            }
+
+        }
+        else {
+            throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
+        }
     }
 
     @Post('borrar/:idParcela')
@@ -95,21 +119,39 @@ export class ParcelaController {
 
     @Get('crear-parcela')
     async crearParcela(
-        @Res() response
+        @Res() response,
+        @Session() sesion
     ) {
 
-        let haciendas: HaciendaEntity[]
-        let usuarios: UsuarioEntity[]
-        haciendas = await this._haciendaService.buscar()
-        usuarios = await this._usuarioService.buscar()
+        let haciendas: HaciendaEntity[];
+        let usuarios: UsuarioEntity[];
+        haciendas = await this._haciendaService.buscar();
+        usuarios = await this._usuarioService.buscar();
 
-        response.render(
-            'crear-parcela',
-            {
-                arregloHaciendas: haciendas,
-                arregloUsuarios: usuarios
+        if (sesion.usuario) {
+            if (sesion.rolUsuario == 1) {
+                response.render(
+                    'crear-parcela',
+                    {
+                        arregloHaciendas: haciendas,
+                        arregloUsuarios: usuarios
+                    }
+                )
+
             }
-        )
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'});
+
+            }
+
+
+        }
+        else {
+            throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
+
+        }
+
+
     }
 
     @Get('actualizar-parcela/:idParcela')
@@ -194,8 +236,16 @@ export class ParcelaController {
         @Res() response,
         @Session() sesion
     ) {
-         response.render('parcelas-subparcelas', {
-         });
+
+        if (sesion.usuario) {
+            response.render('parcelas-subparcelas', {});
+
+        }
+        else {
+            throw new ForbiddenException({mesaje: "No puedes ingresar"})
+
+        }
+
     }
 }
 

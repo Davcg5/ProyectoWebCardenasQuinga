@@ -1,33 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<%- include('comunes/header',{titulo:'Crear- Hacienda'}) %>
 
-    <style>
-        .rojo {
-            background-color: red;
-        }
-    </style>
-    <meta charset="UTF-8">
-    <title>Hcienda</title>
-</head>
-<body>
-<!doctype html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hacienda</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet"
-          href="/bootstrap-4.0.0-dist/css/animate.css">
-
-    <link rel="stylesheet"
-          href="/projec/bootstrap-4.0.0-dist/css/mis-estilos.css">
-</head>
-<body>
+<br>
+<br>
 <div class="container">
     <% var creando = typeof hacienda === "undefined" ? true : false; %>
 
@@ -39,7 +14,7 @@
         <div class="row">
             <div class="col-sm-3">
 
-                <label for="nombre" >Hacienda</label>
+                <label for="nombre">Hacienda</label>
             </div>
             <div class="col-sm-6">
                 <input id="nombre"
@@ -63,51 +38,52 @@
 
             </div>
         </div>
-            <div class="row">
-                <div class="col-sm-3">
-
-                    <label for="telefono" >Telefono</label>
-                </div>
-                <div class="col-sm-6">
-                    <input id="telefono"
-                           value="<%= creando ? '' : hacienda.telefono %>"
-                           name="telefono" type="text">
-                </div>
-
-            </div>
         <div class="row">
             <div class="col-sm-3">
 
-                <label for="region" >Region</label>
+                <label for="telefono">Telefono</label>
             </div>
             <div class="col-sm-6">
-                <select class="custom-select" id = region name="region">
-                    <option selected>Region...</option>
-                    <%arregloRegiones.forEach((regiones)=>{%>
-                    <option value=<%= regiones.id%>>
-                        <%= regiones.nombre%>
-                    </option>
+                <input id="telefono"
+                       value="<%= creando ? '' : hacienda.telefono %>"
+                       name="telefono" type="text">
+            </div>
 
-                    <%})%>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+
+                <label for="region">Region</label>
+            </div>
+            <div class="col-sm-6">
+                <select class="custom-select" id=region name="region">
+                    <option selected>Region...</option>
+                    <% arregloRegiones.forEach((regiones)=>{ %>
+                        <option value=<%= regiones.id %>>
+                            <%= regiones.nombre %>
+                        </option>
+
+                    <% }) %>
                 </select>
             </div>
 
         </div>
 
 
-            <div class="col-sm-3">
+        <div class="col-sm-3">
 
-                <button class="btn btn-outline-info btn-block btn-espaciado" type="reset">Resetear formulario</button>
+            <button class="btn btn-outline-info btn-block btn-espaciado" type="reset">Resetear formulario</button>
 
 
-            </div>
-
+        </div>
 
 
         <div class="row">
             <div class="col-sm-6">
 
-                <button  class="btn btn-outline-success btn-espaciado btn-block" onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Hacienda</button>
+                <button class="btn btn-outline-success btn-espaciado btn-block"
+                        onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Hacienda
+                </button>
             </div>
 
         </div>
@@ -117,56 +93,16 @@
         <div class="col-sm-6">
 
 
-            <a  href="/Hacienda/hacienda">
+            <a href="/Hacienda/hacienda">
                 <button class="btn btn-outline-danger btn-block btn-espaciado">Regresar</button>
             </a>
         </div>
 
     </div>
 
-<script>
-    console.log (hacienda.regiones)
-
-
-    const etiquetaSelectRegiones = document
-        .getElementById('regiones');
-
-    arregloRegiones
-        .forEach(
-            (region) => {
-                const nuevaOption = document.createElement('option');
-                nuevaOption.value = region.id;
-                nuevaOption.innerText = region.nombre;
-                etiquetaSelectRegiones.appendChild(nuevaOption);
-            }
-        )
-re
-</script>
-
-    <script>
-        function validarNombre(evento) {
-            // 0) Obtener el valor del campo
-            // 1) Revisar el campo no este vacio
-            // 2) Revisar el campo tenga 3 char
-            const inputNombre = document
-                .getElementById("nombre");
-            const nombre = inputNombre.value;
-            if (nombre.length < 3) {
-                event.preventDefault()
-                alert('Tu nombre es muy corto')
-            }else{
-
-            }
-
-        }
-    </script>
-
-
 </div>
+<br>
 
-
-
-</body>
-</html>
-
+<%- include('comunes/librerias') %>
+<%- include('comunes/footer') %>
 

@@ -1,4 +1,15 @@
-import {Body, Controller, Get, Param, Post, Query, Res} from "@nestjs/common";
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    ForbiddenException,
+    Get,
+    Param,
+    Post,
+    Query,
+    Res,
+    Session
+} from "@nestjs/common";
 import {Hacienda, HaciendaService} from "./hacienda.service";
 import {Like} from "typeorm";
 import {HaciendaEntity} from "./hacienda.entity";
@@ -15,7 +26,8 @@ export class HaciendaController {
     constructor(
         private readonly _haciendaService: HaciendaService,
         private readonly _regionService: RegionService
-    ) {}
+    ) {
+    }
 
 
     @Get('hacienda')
@@ -24,6 +36,7 @@ export class HaciendaController {
         @Query('accion') accion: string,
         @Query('nombre') nombre: string,
         @Query('busqueda') busqueda: string,
+        @Session() sesion
     ) {
 
 
@@ -65,12 +78,32 @@ export class HaciendaController {
             haciendas = await this._haciendaService.buscar();
         }
 
-        response.render('hacienda', {
-            nombre: 'David',
-            arreglo: haciendas,
-            mensaje: mensaje,
-            accion: clase
-        });
+        if (sesion.usuario) {
+            console.log(sesion);
+
+            if (sesion.rolUsuario == 1) {
+                response.render('hacienda', {
+                    nombre: 'David',
+                    arreglo: haciendas,
+                    mensaje: mensaje,
+                    accion: clase
+                });
+
+            }
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'});
+
+            }
+
+
+        }
+        else {
+            throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
+
+
+        }
+
+
     }
 
     @Post('borrar/:idHacienda')
@@ -90,17 +123,33 @@ export class HaciendaController {
 
     @Get('crear-hacienda')
     async crearHacienda(
-        @Res() response
+        @Res() response,
+        @Session() sesion
     ) {
-        let regiones:RegionEntity[]
-        regiones=await this._regionService.buscar()
+        let regiones: RegionEntity[]
+        regiones = await this._regionService.buscar();
+        if (sesion.usuario) {
 
-        response.render(
-            'crear-hacienda',
-            {
-                arregloRegiones:regiones
+            if (sesion.rolUsuario == 1) {
+                response.render(
+                    'crear-hacienda',
+                    {
+                        arregloRegiones: regiones
+                    }
+                )
             }
-        )
+            else {
+                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'});
+
+            }
+
+
+        } else {
+            throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
+
+        }
+
+
     }
 
     @Get('actualizar-hacienda/:idHacienda')
@@ -108,8 +157,8 @@ export class HaciendaController {
         @Param('idHacienda') idHacienda: string,
         @Res() response
     ) {
-        let regiones:RegionEntity[]
-        regiones=await this._regionService.buscar()
+        let regiones: RegionEntity[]
+        regiones = await this._regionService.buscar()
         const haciendaAActualizar = await this
             ._haciendaService
             .buscarPorId(Number(idHacienda));
@@ -117,7 +166,7 @@ export class HaciendaController {
         response.render(
             'crear-hacienda', {
                 hacienda: haciendaAActualizar,
-                arregloRegiones:regiones
+                arregloRegiones: regiones
 
             }
         )
@@ -152,7 +201,7 @@ export class HaciendaController {
         haciendaValidada.nombre = hacienda.nombre
         haciendaValidada.direccion = hacienda.direccion
         haciendaValidada.telefono = hacienda.telefono
-        haciendaValidada.region =+hacienda.region
+        haciendaValidada.region = +hacienda.region
 
         console.log(haciendaValidada)
         const errores: ValidationError[] = await validate(haciendaValidada)
@@ -164,13 +213,13 @@ export class HaciendaController {
             response.redirect('/Hacienda/crear-hacienda?error=Hay errores')
         }
         else {
-const haciendaFinal = {
-    id:hacienda.id,
-    nombre:hacienda.nombre,
-    direccion:hacienda.direccion,
-    telefono:hacienda.telefono,
-    region:+hacienda.region
-}
+            const haciendaFinal = {
+                id: hacienda.id,
+                nombre: hacienda.nombre,
+                direccion: hacienda.direccion,
+                telefono: hacienda.telefono,
+                region: +hacienda.region
+            }
             await this._haciendaService.crear(haciendaFinal);
 
             const parametrosConsulta = `?accion=crear&nombre=${hacienda.nombre}`;
