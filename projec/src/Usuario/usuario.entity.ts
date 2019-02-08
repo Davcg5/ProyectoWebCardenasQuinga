@@ -78,7 +78,8 @@ export class UsuarioEntity {
 
         rolUsuario => rolUsuario.idRolUsuario // Cual es el campo FK
     )
-    rolUsuarios: RolUsuarioEntity;
+    rolUsuarios: RolUsuarioEntity[];
+
 
 
 }

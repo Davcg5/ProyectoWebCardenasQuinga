@@ -8,6 +8,8 @@ import {HaciendaEntity} from "../hacienda/hacienda.entity";
 import {RolEntity} from "../rol/rol.entity";
 import {ParcelaEntity} from "../Parcela/parcela.entity";
 import {SubparcelaEntity} from "../Subparcela/subparcela.entity";
+import {Usuario, UsuarioService} from "../Usuario/usuario.service";
+import {UsuarioEntity} from "../Usuario/usuario.entity";
 
 @Controller('Encargado')
 export class Encargadocontroller {
@@ -16,34 +18,46 @@ export class Encargadocontroller {
         private readonly _encargadoService: EncargadoService,
         private readonly _parcelaService: ParcelaService,
         private readonly _subparcelaService: SubparcelaService,
+        private readonly _UsuarioService: UsuarioService,
     ) {
     }
 
 
     @Get('menu')
-    menuEncargado(
+    async menuEncargado(
         @Res()
             response,
         @Session()
             sesion,
-        @Body('rolUsuario') rolUsuario: number,
-s     ) {
+    ) {
+
+        sesion.usuario;
         console.log(sesion);
-        sesion.rolUsuario;
+
 
         if (sesion.usuario) {
 
-            if (sesion.rolUsuario == 2) {
+            //     if (sesion.rolUsuario == 2) {
 
-                response.render('Encargado/menuEncargado', {
-                    sessionUsuario: sesion.usuario
-                });
 
-            } else {
-                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'})
+            const esEncargado = sesion.rolUsuario;
 
-            }
+            let usuario: UsuarioEntity[];
+            usuario = await
+                this._UsuarioService.buscar(sesion.usuario);
+            console.log("cascascascascasc", usuario);
 
+            response.render('Encargado/menuEncargado', {
+                sessionUsuario: sesion.usuario,
+                esEncargado: esEncargado,
+                arregloUsuario: usuario
+            });
+
+
+            //  } else {
+            //    throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'})
+
+            //}
 
         }
         else {

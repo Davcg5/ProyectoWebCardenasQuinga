@@ -24,7 +24,7 @@ export class UsuarioService {
 
 
     async crear(nuevoUsuario: Usuario): Promise<UsuarioEntity> {
-        console.log(nuevoUsuario.rolUsuario,2)
+        console.log(nuevoUsuario.rolUsuario, 2)
         // Instanciar una entidad -> .create()
         const usuarioEntity = this._usuarioRepository.create(nuevoUsuario);
         const usuarioCreado = await this._usuarioRepository.save(usuarioEntity);
@@ -42,7 +42,8 @@ export class UsuarioService {
 
     borrar(idUsuario: number): Promise<UsuarioEntity> {
         const usuarioEntityAEliminar = this._usuarioRepository.create({
-            idUsuario: idUsuario});
+            idUsuario: idUsuario
+        });
         return this._usuarioRepository.remove(usuarioEntityAEliminar)
     }
 
@@ -51,34 +52,26 @@ export class UsuarioService {
     }
 
 
-     todos(){
-        const usuarioEncontrado =  this._usuarioRepository.find()
+    todos() {
+        const usuarioEncontrado = this._usuarioRepository.find()
         return usuarioEncontrado
     }
 
 
     async login(cedula: string, contraseña: string)
-        : Promise<boolean> {
+        : Promise<UsuarioEntity> {
         // 1) Buscar al usuario por username
         // 2) Comparar si el password es igual al password
 
         const usuarioEncontrado = await this._usuarioRepository
             .findOne({
                 where: {
-                    cedulaUsuario: cedula
+                    cedulaUsuario: cedula,
+                   // contraseñaUsuario: contraseña
                 }
             });
-        if (usuarioEncontrado) {
 
-            if (usuarioEncontrado.contraseñaUsuario === contraseña) {
-                return true;
-            } else {
-                return false;
-            }
-
-        } else {
-            return false;
-        }
+        return await this._usuarioRepository.findOne(usuarioEncontrado)
 
 
     }
@@ -94,6 +87,6 @@ export interface Usuario {
     direccionUsuario: string;
     telefonoUsuario?: string;
     contraseñaUsuario: string;
-    hacienda:any
-    rolUsuario?:number
+    hacienda: any
+    rolUsuario?: number
 }

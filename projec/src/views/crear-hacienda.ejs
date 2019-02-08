@@ -6,8 +6,8 @@
 <div class="container">
     <% var creando = typeof hacienda === "undefined" ? true : false; %>
 
-    <h1> <%= creando ? 'Crear' : 'Actualizar' %> Hacienda</h1>
-    <p><%= creando ? 'Creando' : 'Actualizando' %> una hacienda.</p>
+    <h1 align="center"> <%= creando ? 'Crear' : 'Actualizar' %> Hacienda</h1>
+    <p align="center"><%= creando ? 'Creando' : 'Actualizando' %> una hacienda.</p>
 
     <form action="/Hacienda/<%= creando ? 'crear' : 'actualizar' %>-hacienda/<%= creando ? '' : hacienda.id %>"
           method="POST">
@@ -46,7 +46,7 @@
             <div class="col-sm-6">
                 <input id="telefono"
                        value="<%= creando ? '' : hacienda.telefono %>"
-                       name="telefono" type="text">
+                       name="telefono" type="number">
             </div>
 
         </div>
@@ -56,8 +56,8 @@
                 <label for="region">Region</label>
             </div>
             <div class="col-sm-6">
-                <select class="custom-select" id=region name="region">
-                    <option selected>Region...</option>
+                <select class="custom-select-sm" id=region name="region">
+                    <label selected for="region">Region...</label>
                     <% arregloRegiones.forEach((regiones)=>{ %>
                         <option value=<%= regiones.id %>>
                             <%= regiones.nombre %>
@@ -68,7 +68,7 @@
             </div>
 
         </div>
-
+<br>
 
         <div class="col-sm-3">
 
@@ -77,8 +77,8 @@
 
         </div>
 
-
-        <div class="row">
+<br>
+        <div align="center">
             <div class="col-sm-6">
 
                 <button class="btn btn-outline-success btn-espaciado btn-block"
@@ -87,9 +87,9 @@
             </div>
 
         </div>
-
+<br>
     </form>
-    <div class="row">
+    <div  align="center">
         <div class="col-sm-6">
 
 

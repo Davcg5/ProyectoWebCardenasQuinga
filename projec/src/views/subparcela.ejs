@@ -12,7 +12,6 @@
         <% } %>
 
         <% var apellido = 'Cardenas' %>
-        <!-- h1 -> Header 1 -->
         <nav>
             <ul class="nav justify-content-end">
 
@@ -23,21 +22,22 @@
             </ul>
 
         </nav>
-        <h1> Lista de Subparcelas</h1>
-        <p>Crea, edita, actualiza y busca parcelas. Puedes buscar
-            parcelas por codigo.
+        <h1 align="center"> Lista de Subparcelas</h1>
+        <p align="center">Crea, edita, actualiza y busca parcelas. Puedes buscar
+            Subparcelas por codigo.
         </p>
 
 
         <form action="/Subparcela/parcela" method="get">
-            <div class="row">
+            <div align="center">
                 <div class="col-sm-9">
 
                     <div class="form-group">
-                        <label for="busqueda">Busqueda</label>
                         <input id="busqueda"
                                type="text"
                                class="form-control"
+                               placeholder="Buscar Sub-parcela"
+
                                name="busqueda">
                     </div>
 
@@ -51,8 +51,8 @@
                 </div>
             </div>
         </form>
-
-        <div class="row">
+        <br>
+        <div align="center">
             <div class="col-sm-9"></div>
             <div class="col-sm-3">
                 <a class="quitar-decoracion" href="/Subparcela/crear-subparcela">
@@ -62,14 +62,13 @@
                 </a>
             </div>
         </div>
-        <h2> Arreglo </h2>
-
+        <br>
 
         <table class="table table-striped table-hover animated fadeInUp">
             <caption>Lista de Subarcelas</caption>
             <!-- tr -> table row -->
             <thead>
-            <tr>
+            <tr align="center">
                 <!-- th -> table header -->
                 <th width="30%">Código</th>
                 <th width="50%">Medidas</th>
@@ -79,7 +78,7 @@
             <!-- tr -> table row -->
             <tbody>
             <% arreglo.forEach((subparcela)=>{ %>
-                <tr>
+                <tr align="center">
                     <!-- td -> table detail -->
                     <td><%= subparcela.codigo %></td>
                     <td><%= subparcela.medidas %></td>

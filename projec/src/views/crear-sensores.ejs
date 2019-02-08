@@ -7,8 +7,9 @@
 <div class="container">
     <% var creando = typeof sensor === "undefined" ? true : false; %>
 
-    <h1> <%= creando ? 'Crear' : 'Actualizar' %> Sensor</h1>
-    <p><%= creando ? 'Creando' : 'Actualizando' %> un sensor.</p>
+    <h1 align="center"> <%= creando ? 'Crear' : 'Actualizar' %> Sensor</h1>
+    <p align="center"><%= creando ? 'Creando' : 'Actualizando' %> un sensor.</p>
+    <br>
 
     <form action="/Sensor/<%= creando ? 'crear' : 'actualizar' %>-sensores/<%= creando ? '' : sensor.id %>"
           method="POST">
@@ -24,6 +25,7 @@
             </div>
 
         </div>
+        <br>
 
 
         <div class="row">
@@ -32,8 +34,8 @@
                 <label for="subparcela">Subparcela</label>
             </div>
             <div class="col-sm-6">
-                <select class="custom-select" id=subparcela name="subparcela">
-                    <option selected>Subparcela...</option>
+                <select class="custom-select-sm" id=subparcela name="subparcela">
+                    <!--   <option selected>Subparcela...</option>-->
                     <% arregloSubparcelas.forEach((subparcela)=>{ %>
                         <option value=<%= subparcela.id %>>
                             <%= subparcela.codigo %>
@@ -45,6 +47,7 @@
 
         </div>
 
+        <br>
 
         <div class="col-sm-3">
 
@@ -53,8 +56,8 @@
 
         </div>
 
-
-        <div class="row">
+        <br>
+        <div align="center">
             <div class="col-sm-6">
 
                 <button class="btn btn-outline-success btn-espaciado btn-block"
@@ -63,9 +66,9 @@
             </div>
 
         </div>
-
+        <br>
     </form>
-    <div class="row">
+    <div align="center">
         <div class="col-sm-6">
 
 

@@ -3,16 +3,7 @@
 
 <div class="container">
     <div class="solid">
-        <% const existeMensaje = typeof mensaje !== "undefined" ? true : false; %>
 
-        <% if(existeMensaje){ %>
-            <div class="animated fadeOut alert alert-<%= accion %>" role="alert">
-                MENSAJE: <%= mensaje %>
-            </div>
-        <% } %>
-
-        <% var apellido = 'Cardenas' %>
-        <!-- h1 -> Header 1 -->
         <nav>
             <ul class="nav justify-content-end">
 
@@ -23,21 +14,31 @@
             </ul>
 
         </nav>
-        <h1> Lista de parcelas</h1>
-        <p>Crea, edita, actualiza y busca parcelas. Puedes buscar
+        <% const existeMensaje = typeof mensaje !== "undefined" ? true : false; %>
+
+        <% if(existeMensaje){ %>
+            <div class="animated fadeOut alert alert-<%= accion %>" role="alert">
+                MENSAJE: <%= mensaje %>
+            </div>
+        <% } %>
+
+        <br>
+
+        <h1 align="center"> Lista de parcelas</h1>
+        <p align="center">Crea, edita, actualiza y busca parcelas. Puedes buscar
             parcelas por codigo.
         </p>
 
 
         <form action="/Parcela/Parcela" method="get">
-            <div class="row">
+            <div align="center">
                 <div class="col-sm-9">
 
                     <div class="form-group">
-                        <label for="busqueda">Busqueda</label>
                         <input id="busqueda"
                                type="text"
                                class="form-control"
+                               placeholder="Buscar Parcela"
                                name="busqueda">
                     </div>
 
@@ -51,8 +52,9 @@
                 </div>
             </div>
         </form>
+        <br>
 
-        <div class="row">
+        <div align="center">
             <div class="col-sm-9"></div>
             <div class="col-sm-3">
                 <a class="quitar-decoracion" href="/Parcela/crear-parcela">
@@ -62,24 +64,25 @@
                 </a>
             </div>
         </div>
-        <h2> Arreglo </h2>
-
+        <br>
 
         <table class="table table-striped table-hover animated fadeInUp">
             <caption>Lista de Parcelas</caption>
             <!-- tr -> table row -->
             <thead>
-            <tr>
+            <tr align="center">
                 <!-- th -> table header -->
                 <th width="30%">Código</th>
                 <th width="50%">Medidas</th>
+                <th width="50%">Acción</th>
+
 
             </tr>
             </thead>
             <!-- tr -> table row -->
             <tbody>
             <% arreglo.forEach((parcela)=>{ %>
-                <tr>
+                <tr align="center">
                     <!-- td -> table detail -->
                     <td><%= parcela.codigo %></td>
                     <td><%= parcela.medidas %></td>

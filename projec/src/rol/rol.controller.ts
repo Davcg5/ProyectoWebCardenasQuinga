@@ -29,22 +29,27 @@ export class RolController {
             sesion
     ) {
 
+        console.log(sesion);
 
         if (sesion.usuario) {
-            if (sesion.rolUsuario == 1) {
-                console.log(sesion);
-                response.render('Administrador/menuAdministrador', {
-                    sessionUsuario: sesion.usuario
-                });
-            }
-            else {
-                throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'});
-            }
+            //   if (sesion.rolUsuario == 1) {
+
+            const esAdministrador = sesion.rolUsuario;
+            response.render('Administrador/menuAdministrador', {
+                sessionUsuario: sesion.usuario,
+                esAdministrador: esAdministrador
+
+
+            });
+            // }
+            // else {
+            //   throw new BadRequestException({mensaje: 'No puedes Ingresar con tu Usuario'});
+            //}
 
         }
-        else {
+        // else {
 
-            throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
-        }
+        //   throw new ForbiddenException({mesaje: "Error Inicia Sesión"})
+        //}
     }
 }

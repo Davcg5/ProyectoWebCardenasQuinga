@@ -103,11 +103,12 @@ export class UsuarioController {
         if (sesion.usuario) {
 
             if (sesion.rolUsuario == 1) {
+
                 response.render('UsuarioPantalla/usuario', {
                     nombreUsuario: 'Vinicio',
                     arregloUsuario: usuarios,
-                    mensajeUsuario: mensaje,
-                    accionUsuario: clase,
+                    mensaje: mensaje,
+                    accion: clase,
                     session: sesion.usuario
                 })
             }
@@ -145,10 +146,14 @@ export class UsuarioController {
         if (sesion.usuario) {
 
             if (sesion.rolUsuario == 1) {
+
+                const crear = 1;
+
                 response.render(
                     'UsuarioPantalla/crear-usuario', {
                         arregloRol: rol,
-                        arregloHacienda: hacienda
+                        arregloHacienda: hacienda,
+                        crear: crear
                     });
             }
             else {
@@ -265,13 +270,15 @@ export class UsuarioController {
         let rol: RolEntity[];
         rol = await
             this._rolservice.buscar();
+        const crear = 2;
 
 
         response.render(
             'UsuarioPantalla/crear-usuario', {//ir a la pantalla de crear-usuario
                 usuario: usuarioAActualizar,
                 arregloHacienda: hacienda,
-                arregloRol: rol
+                arregloRol: rol,
+                crear: crear
             }
         )
     }

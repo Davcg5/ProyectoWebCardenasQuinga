@@ -14,8 +14,6 @@
             </div>
         <% } %>
 
-        <% var apellido = 'Cardenas' %>
-        <!-- h1 -> Header 1 -->
         <nav>
             <ul class="nav justify-content-end">
 
@@ -25,20 +23,21 @@
             </ul>
 
         </nav>
-        <h1> Lista de Sensor</h1>
-        <p>Crea, edita, actualiza y busca parcelas. Puedes buscar
-            parcelas por codigo.
+        <h1 align="center"> Lista de Sensor</h1>
+        <p align="center"> Puedes buscar
+            Sensores por codigo.
         </p>
 
         <form action="/Sensor/sensor" method="get">
-            <div class="row">
+            <div align="center">
                 <div class="col-sm-9">
 
                     <div class="form-group">
-                        <label for="busqueda">Busqueda</label>
                         <input id="busqueda"
                                type="text"
                                class="form-control"
+                               placeholder="Buscar Sensor"
+
                                name="busqueda">
                     </div>
 
@@ -52,8 +51,9 @@
                 </div>
             </div>
         </form>
+        <br>
 
-        <div class="row">
+        <div class="" align="center">
             <div class="col-sm-9"></div>
             <div class="col-sm-3">
                 <a class="quitar-decoracion" href="/Sensor/crear-sensores">
@@ -63,14 +63,13 @@
                 </a>
             </div>
         </div>
-        <h2> Arreglo </h2>
 
+        <br>
 
         <table class="table table-striped table-hover animated fadeInUp">
             <caption>Lista de Sensores asignados</caption>
-            <!-- tr -> table row -->
             <thead>
-            <tr>
+            <tr align="center">
                 <!-- th -> table header -->
                 <th width="30%">Código</th>
 

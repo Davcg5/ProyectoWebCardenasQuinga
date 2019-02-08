@@ -4,14 +4,6 @@
     <div class="container">
         <br>
         <div class="solid">
-            <!--   <h1>Bienvenidos</h1>-->
-            <nav>
-                <ul class="nav justify-content-end">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Rol/menuAdministrador" style="color: black">Ménu Principal</a>
-                    </li>
-                </ul>
-            </nav>
 
             <% const existeMensaje = typeof mensaje !== "undefined" ? true : false; %>
 
@@ -21,7 +13,15 @@
                 </div>
             <% } %>
 
-            <% var apellido = 'Cardenas' %>
+            <nav>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Rol/menuAdministrador" style="color: black">Ménu Principal</a>
+                    </li>
+                </ul>
+            </nav>
+
+
             <h1> Lista de Usuarios</h1>
             <p>Crea, edita, actualiza y busca Usuarios. Puedes buscar
                 Usuarios por nombre o Cédula.
@@ -68,7 +68,6 @@
                     <th scope="col">Contraseña</th>
                     <th scope="col">Dirección</th>
                     <th scope="col"> Teléfono</th>
-                    <th scope="col"> Hacienda</th>
                     <th scope="col"> Accion</th>
                 </tr>
                 </thead>
@@ -95,8 +94,6 @@
                             <%= usuario.telefonoUsuario %>
                         </td>
 
-                        <td align="center">
-                        </td>
 
                         <td align="center">
 

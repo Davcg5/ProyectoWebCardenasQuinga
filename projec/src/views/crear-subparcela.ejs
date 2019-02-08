@@ -1,22 +1,19 @@
-
-
 <%- include('comunes/header',{titulo:'Crear subparcela'}) %>
 <br>
-
 
 
 <div class="container">
     <% var creando = typeof subparcela === "undefined" ? true : false; %>
 
-    <h1> <%= creando ? 'Crear' : 'Actualizar' %> Subparcela</h1>
-    <p><%= creando ? 'Creando' : 'Actualizando' %> una subparcela.</p>
+    <h1 align="center"> <%= creando ? 'Crear' : 'Actualizar' %> Subparcela</h1>
+    <p align="center"><%= creando ? 'Creando' : 'Actualizando' %> una subparcela.</p>
 
     <form action="/Subparcela/<%= creando ? 'crear' : 'actualizar' %>-subparcela/<%= creando ? '' : subparcela.id %>"
           method="POST">
         <div class="row">
             <div class="col-sm-3">
 
-                <label for="nombre" >Código subparcela</label>
+                <label for="nombre">Código subparcela</label>
             </div>
             <div class="col-sm-6">
                 <input id="codigo"
@@ -25,11 +22,12 @@
             </div>
 
         </div>
+        <br>
 
         <div class="row">
             <div class="col-sm-3">
 
-                <label for="medidas" >Medidas subparcela</label>
+                <label for="medidas">Medidas subparcela</label>
             </div>
             <div class="col-sm-6">
                 <input id="medidas"
@@ -39,26 +37,25 @@
 
         </div>
 
+        <br>
+
         <div class="row">
             <div class="col-sm-3">
 
-                <label for="parcela" >Parcela</label>
+                <label for="parcela">Parcela</label>
             </div>
             <div class="col-sm-6">
-                <select class="custom-select" id = parcela name="parcela">
-                    <option selected>Parcela...</option>
-                    <%arregloParcelas.forEach((parcelas)=>{%>
-                        <option value=<%= parcelas.id%>>
-                            <%= parcelas.codigo%>
+                <select class="custom-select-sm" id=parcela name="parcela">
+                    <% arregloParcelas.forEach((parcelas)=>{ %>
+                        <option value=<%= parcelas.id %>>
+                            <%= parcelas.codigo %>
                         </option>
 
-                    <%})%>
+                    <% }) %>
                 </select>
             </div>
 
         </div>
-
-
 
 
         <div class="col-sm-3">
@@ -68,28 +65,30 @@
 
         </div>
 
-
-
-        <div class="row">
+        <br>
+        <div align="center">
             <div class="col-sm-6">
 
-                <button  class="btn btn-outline-success btn-espaciado btn-block" onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Subparcela</button>
+                <button class="btn btn-outline-success btn-espaciado btn-block"
+                        onclick="validarNombre(event)"><%= creando ? 'Crear' : 'Actualizar' %> Subparcela
+                </button>
             </div>
 
         </div>
 
     </form>
-    <div class="row">
+
+    <br>
+    <div align="center">
         <div class="col-sm-6">
 
 
-            <a  href="/Subparcela/subparcela">
+            <a href="/Subparcela/subparcela">
                 <button class="btn btn-outline-danger btn-block btn-espaciado">Regresar</button>
             </a>
         </div>
 
     </div>
-
 
 
 </div>

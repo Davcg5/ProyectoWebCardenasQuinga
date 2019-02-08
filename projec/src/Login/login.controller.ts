@@ -27,9 +27,11 @@ export class LoginController {
         @Res() response,
         @Session() sesion
     ) {
+
         const identificado = await this._usuarioService
             .login(cedula, contraseña);
-
+        const idUsuario = identificado.idUsuario;
+        console.log(idUsuario)
 
         const loginvalidadoU = new LoginDto();
         loginvalidadoU.cedula = cedula;
@@ -46,48 +48,48 @@ export class LoginController {
             response.redirect('/Login/login?error= errordecredenciales');
 
         } else {
+            const rolUsuario = await this.__rolUsuarioService.verificarRoles(idUsuario);
+
+            console.log("ascacascascascas", rolUsuario)
+            if (rolUsuario) {
+
+                sesion.usuario = cedula;
+                sesion.rolUsuario = rolUsuario.roles.nombreRol;
+                sesion.rolUsuario = rolUsuario.roles.idRol;
+
+                const verificarRoles = rolUsuario.roles.nombreRol;
 
 
-            if (rolUsuario == 1) {
-
-                if (identificado) {
-                    sesion.usuario = cedula;
-                    sesion.rolUsuario = rolUsuario;
-
-                    console.log("dscsdcsdcsdcsdc", sesion.rolUsuario);
-                    response.redirect('/Rol/menuAdministrador')
-
-                } else {
-                    throw new BadRequestException({mensaje: 'Error login'})
-                }
+                switch (verificarRoles) {
 
 
-            } else if (rolUsuario == 2) {
+                    case 'Administrador':
 
-                if (identificado) {
-                    sesion.usuario = cedula;
-                    sesion.rolUsuario = rolUsuario;
-                    response.redirect('/Encargado/menu')
+                        response.redirect('/Rol/menuAdministrador')
 
-                } else {
-                    throw new BadRequestException({mensaje: 'Error login'})
+                        break;
+
+                    case 'Encargado':
+
+
+                        response.redirect('/Encargado/menu')
+                        break;
                 }
 
             }
-
-
         }
-
-
     }
+
 
     @Get('login')
     async loginVista(
-        @Res() response
+        @Res()
+            response
     ) {
 
         let roles: RolEntity[];
-        roles = await this._rolesService.buscar();
+        roles = await
+            this._rolesService.buscar();
         response.render('inicioLogin/login', {
                 arregloRol: roles
             }
@@ -97,8 +99,10 @@ export class LoginController {
 
     @Get('logout')
     logout(
-        @Res() response,
-        @Session() sesion,
+        @Res()
+            response,
+        @Session()
+            sesion,
     ) {
         sesion.usuario = undefined;
         sesion.destroy();
@@ -109,7 +113,8 @@ export class LoginController {
 
     @Get('home')
     homeVista(
-        @Res() response
+        @Res()
+            response
     ) {
         response.render('inicioLogin/home')
     }
@@ -117,7 +122,8 @@ export class LoginController {
 
     @Get('acerca')
     acercaHome(
-        @Res() response
+        @Res()
+            response
     ) {
         response.render('inicioLogin/acerca')
 
@@ -125,14 +131,15 @@ export class LoginController {
 
     @Get('contactanos')
     contactanosHome(
-        @Res() response
+        @Res()
+            response
     ) {
         response.render('inicioLogin/contactanos')
 
     }
 
 
-    @Get('')
+    @Get()
     todos() {
         this.__rolUsuarioService.todos().then(res => {
             console.log("csdcsdcsdcsdc", res)
@@ -142,3 +149,5 @@ export class LoginController {
 
 
 }
+
+

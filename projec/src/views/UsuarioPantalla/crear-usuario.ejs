@@ -1,4 +1,3 @@
-
 <%- include('../comunes/header',{titulo:'Crear Usuario'}) %>
 <center>
     <div class="container">
@@ -76,21 +75,24 @@
 
                     </div>
 
-                    <div class="col">
+                    <% if (crear == 1){ %>
 
-                        <label for="rolUsuario">Seleccionar Rol:</label>
-                        <select class="form-control-sm" id=rolUsuario name="rolUsuario">
-                            <% arregloRol.forEach((rol)=>{ %>
+                        <div class="col">
 
-                                <option value=<%= rol.idRol %>>
-                                    <%= rol.nombreRol %>
+                            <label for="rolUsuario">Seleccionar Rol:</label>
+                            <select class="form-control-sm" id=rolUsuario name="rolUsuario">
+                                <% arregloRol.forEach((rol)=>{ %>
 
-                                </option>
-                            <% }) %>
+                                    <option value=<%= rol.idRol %>>
+                                        <%= rol.nombreRol %>
 
-                        </select>
+                                    </option>
+                                <% }) %>
 
-                    </div>
+                            </select>
+
+                        </div>
+                    <% } %>
                 </div>
                 <br>
 
